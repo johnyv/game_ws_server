@@ -1,18 +1,18 @@
-package message;
+package processor;
 
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ProtobufMessageProcessor implements MessageProcessor {
-    private static Logger logger = LoggerFactory.getLogger(ProtobufMessageProcessor.class);
-    private static ProtobufMessageProcessor instance = new ProtobufMessageProcessor();
+public class ProtobufProcessor implements Processor {
+    private static Logger logger = LoggerFactory.getLogger(ProtobufProcessor.class);
+    private static ProtobufProcessor instance = new ProtobufProcessor();
     protected ChannelHandlerContext ctx;
 
-    public ProtobufMessageProcessor() {
+    public ProtobufProcessor() {
     }
 
-    public static ProtobufMessageProcessor getInstance() {
+    public static ProtobufProcessor getInstance() {
         return instance;
     }
 
