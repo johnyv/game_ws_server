@@ -6,7 +6,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
 
-public class ProtobufMessageUtil {
+public class ProtobufUtil {
     public static ByteBuf getBytes(AbstractMessageLite<?, ?> proto) {
         byte[] bytes = proto.toByteArray();
         return Unpooled.copiedBuffer(bytes);

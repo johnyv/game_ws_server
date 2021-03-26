@@ -10,12 +10,12 @@ public class ClientInfo {
     public static final AttributeKey<ClientInfo> CHANNEL_INFO = AttributeKey.valueOf("channelInfo");
     private String channelId;
     private String uid;
-    private Channel channel;
+    private ChannelHandlerContext ctx;
     private Set<String> group;
 
     public ClientInfo(ChannelHandlerContext ctx, String id){
-        channel = ctx.channel();
-        channelId = channel.id().asLongText();
+        this.ctx = ctx;
+        channelId = ctx.channel().id().asLongText();
         uid = id;
         GroupManager.INSTANCE.addMember(this);
     }
@@ -25,6 +25,6 @@ public class ClientInfo {
     }
 
     public Channel getChannel() {
-        return channel;
+        return ctx.channel();
     }
 }

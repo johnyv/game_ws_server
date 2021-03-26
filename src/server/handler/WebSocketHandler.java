@@ -14,6 +14,8 @@ import io.netty.handler.codec.http.websocketx.*;
 import io.netty.util.CharsetUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import processor.data.RecvPacket;
+import utils.ByteUtil;
 
 public class WebSocketHandler extends ChannelInboundHandlerAdapter {
     private final Logger logger = LoggerFactory.getLogger(WebSocketHandler.class);
@@ -99,16 +101,39 @@ public class WebSocketHandler extends ChannelInboundHandlerAdapter {
         }
 
         if (frame instanceof TextWebSocketFrame) {
-            TextWebSocketFrame txt = (TextWebSocketFrame) frame;
-            String rtn = "TextWebSocketFrame:" + txt.text();
-            ctx.channel().write(new TextWebSocketFrame(rtn));
+            TextWebSocketFrame tFrame = (TextWebSocketFrame) frame;
+            String txt = "TextWebSocketFrame:" + tFrame.text();
+            ctx.channel().write(new TextWebSocketFrame(txt));
             return;
         }
         if (frame instanceof BinaryWebSocketFrame) {
-            BinaryWebSocketFrame binFrame = (BinaryWebSocketFrame) frame;
-            byte[] bytes = new byte[binFrame.content().readableBytes()];
-            binFrame.content().readBytes(bytes);
+            BinaryWebSocketFrame bFrame = (BinaryWebSocketFrame) frame;
+            byte[] bytes = new byte[bFrame.content().readableBytes()];
+            bFrame.content().readBytes(bytes);
 
+            int i, index = 0;
+            byte[] lengthBytes = new byte[4];
+            for (i = 0; i < 4; i++) {
+                lengthBytes[index++] = bytes[i];
+            }
+            int length = ByteUtil.bytes2Int(lengthBytes);
+
+            byte[] protocolBytes = new byte[4];
+            index = 0;
+            for (i = 4; i < 8; i++) {
+                protocolBytes[index++] = bytes[i];
+            }
+            int protocol = ByteUtil.bytes2Int(protocolBytes);
+
+            byte[] dataBytes = new byte[bytes.length - 4];
+            index = 0;
+            for (i = 8; i < bytes.length; i++) {
+                dataBytes[index++] = bytes[i];
+            }
+            logger.info("length:" + length);
+            logger.info("protocol:" + protocol);
+
+            RecvPacket packet = new RecvPacket(length, protocol, dataBytes);
             try {
 //                ProtobufProcessor pbProcessor = ProtobufProcessor.getInstance();
 //                pbProcessor.process(ctx, bytes);
