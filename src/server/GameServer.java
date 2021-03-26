@@ -76,6 +76,8 @@ public class GameServer {
 
             logger.info("listen..." + address.getAddress().toString());
             logger.info(String.format("port...%d", address.getPort()));
+            ProcessorLoader loader = new ProcessorLoader();
+            loader.load();
 
             channel.closeFuture().sync();
         } catch (InterruptedException e) {
@@ -97,9 +99,6 @@ public class GameServer {
 
     public static void main(String[] args) throws Exception {
         try {
-            ProcessorLoader loader = new ProcessorLoader();
-            loader.load();
-
             GameServer server = GameServer.getInstance();
             server.listen("127.0.0.1", PORT);
 //            server.run();

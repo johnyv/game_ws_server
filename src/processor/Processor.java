@@ -1,16 +1,22 @@
 package processor;
 
-import io.netty.channel.Channel;
+import group.ClientInfo;
+import io.netty.channel.ChannelHandlerContext;
+import processor.data.RecvPacket;
 
-<<<<<<< HEAD:src/message/MessageProcessor.java
-public abstract class MessageProcessor {
-    abstract void process(Channel channel, byte[] bytes) throws Exception;
-=======
-public interface Processor {
-    void init(ChannelHandlerContext ctx, byte[] bytes) throws Exception;
+public abstract class Processor {
+    //    void init(ChannelHandlerContext ctx, byte[] bytes) throws Exception;
+    protected int code = 0;
 
-    void process(ChannelHandlerContext ctx, byte[] bytes) throws Exception;
+    public int getCode() {
+        return code;
+    }
 
-    void send(String msg);
->>>>>>> 698a5de9e4296c165f17f4c968b91ee5fd2ab002:src/processor/Processor.java
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public abstract void process(ClientInfo client, RecvPacket packet) throws Exception;
+
+//    void send(String msg);
 }

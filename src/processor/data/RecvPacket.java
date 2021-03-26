@@ -1,4 +1,4 @@
-package message.data;
+package processor.data;
 
 public class RecvPacket {
     private byte[] data;

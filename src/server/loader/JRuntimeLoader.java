@@ -10,12 +10,14 @@ public class JRuntimeLoader {
     private static final Logger logger = LoggerFactory.getLogger(JRuntimeLoader.class);
     volatile ClassLoader classLoader;
 
-    public JRuntimeLoader(){
+    public JRuntimeLoader() {
         classLoader = getClass().getClassLoader();
     }
-    public ClassLoader getClassLoader(){
+
+    public ClassLoader getClassLoader() {
         return classLoader;
     }
+
     public Object runScript(String className, String method, Object... args) throws Exception {
         Object obj = classLoader.loadClass(className).newInstance();
         return invokeObjMethod(obj, method, args);
@@ -32,8 +34,7 @@ public class JRuntimeLoader {
         return constructor.newInstance(args);
     }
 
-    private static Object invokeObjMethod(Object obj,
-                                          String methodName, Object... arg) throws Exception {
+    private static Object invokeObjMethod(Object obj, String methodName, Object... arg) throws Exception {
         Class[] cs = getClassType(arg);
         Method method = obj.getClass().getMethod(methodName, cs);
         Object result = method.invoke(obj, arg);
