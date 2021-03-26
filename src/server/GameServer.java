@@ -16,7 +16,9 @@ import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import processor.ProcessorLoader;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 
 public class GameServer {
@@ -95,6 +97,9 @@ public class GameServer {
 
     public static void main(String[] args) throws Exception {
         try {
+            ProcessorLoader loader = new ProcessorLoader();
+            loader.load();
+
             GameServer server = GameServer.getInstance();
             server.listen("127.0.0.1", PORT);
 //            server.run();
