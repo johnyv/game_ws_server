@@ -12,7 +12,7 @@ import io.netty.handler.codec.http.HttpResponseStatus;
 import io.netty.handler.codec.http.HttpVersion;
 import io.netty.handler.codec.http.websocketx.*;
 import io.netty.util.CharsetUtil;
-import message.ProtobufMessageProcessor;
+import message.ProtobufProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -111,8 +111,8 @@ public class WebSocketHandler extends ChannelInboundHandlerAdapter {
             binFrame.content().readBytes(bytes);
 
             try {
-                ProtobufMessageProcessor pbProcessor = ProtobufMessageProcessor.getInstance();
-                pbProcessor.process(ctx, bytes);
+//                ProtobufProcessor pbProcessor = ProtobufProcessor.getInstance();
+//                pbProcessor.process(ctx, bytes);
             } catch (Exception e) {
                 e.printStackTrace();
                 logger.error("parse failed.");

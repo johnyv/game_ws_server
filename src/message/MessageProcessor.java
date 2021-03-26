@@ -1,11 +1,7 @@
 package message;
 
-import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.Channel;
 
-public interface MessageProcessor {
-    void init(ChannelHandlerContext ctx, byte[] bytes) throws Exception;
-
-    void process(ChannelHandlerContext ctx, byte[] bytes) throws Exception;
-
-    void send(String msg);
+public abstract class MessageProcessor {
+    abstract void process(Channel channel, byte[] bytes) throws Exception;
 }
