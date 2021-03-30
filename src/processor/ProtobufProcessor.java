@@ -20,7 +20,7 @@ public class ProtobufProcessor extends Processor {
 
     @Override
     public void process(ClientInfo client, RecvPacket packet) throws Exception {
-
+        logger.info("process");
     }
 
 //    @Override

@@ -1,5 +1,6 @@
 package server.handler;
 
+import group.ClientInfo;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
@@ -15,6 +16,7 @@ import io.netty.util.CharsetUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import processor.data.RecvPacket;
+import server.GameServer;
 import utils.ByteUtil;
 
 public class WebSocketHandler extends ChannelInboundHandlerAdapter {
@@ -111,32 +113,10 @@ public class WebSocketHandler extends ChannelInboundHandlerAdapter {
             byte[] bytes = new byte[bFrame.content().readableBytes()];
             bFrame.content().readBytes(bytes);
 
-            int i, index = 0;
-            byte[] lengthBytes = new byte[4];
-            for (i = 0; i < 4; i++) {
-                lengthBytes[index++] = bytes[i];
-            }
-            int length = ByteUtil.bytes2Int(lengthBytes);
-
-            byte[] protocolBytes = new byte[4];
-            index = 0;
-            for (i = 4; i < 8; i++) {
-                protocolBytes[index++] = bytes[i];
-            }
-            int protocol = ByteUtil.bytes2Int(protocolBytes);
-
-            byte[] dataBytes = new byte[bytes.length - 4];
-            index = 0;
-            for (i = 8; i < bytes.length; i++) {
-                dataBytes[index++] = bytes[i];
-            }
-            logger.info("length:" + length);
-            logger.info("protocol:" + protocol);
-
-            RecvPacket packet = new RecvPacket(length, protocol, dataBytes);
             try {
-//                ProtobufProcessor pbProcessor = ProtobufProcessor.getInstance();
-//                pbProcessor.process(ctx, bytes);
+                RecvPacket packet = new RecvPacket(bytes);
+                ClientInfo info = new ClientInfo(ctx, ctx.channel().id().asLongText());
+                GameServer.dispatcher.dispatch(info, packet);
             } catch (Exception e) {
                 e.printStackTrace();
                 logger.error("parse failed.");

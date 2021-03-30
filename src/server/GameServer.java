@@ -16,7 +16,9 @@ import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import processor.Dispatcher;
 import processor.ProcessorLoader;
+import processor.ProcessorService;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -32,6 +34,10 @@ public class GameServer {
     private ServerBootstrap bootstrap;
 
     private static GameServer instance = new GameServer();
+
+    public static Dispatcher dispatcher = new Dispatcher();
+    public static ProcessorLoader processorLoader;
+    public static ProcessorService processorService;
 
     public GameServer() {
         bossGroup = buildGroup();//new NioEventLoopGroup();
@@ -76,8 +82,11 @@ public class GameServer {
 
             logger.info("listen..." + address.getAddress().toString());
             logger.info(String.format("port...%d", address.getPort()));
-            ProcessorLoader loader = new ProcessorLoader();
-            loader.load();
+            processorLoader = new ProcessorLoader(dispatcher);
+            processorLoader.load();
+
+            processorService = new ProcessorService();
+            processorService.start();
 
             channel.closeFuture().sync();
         } catch (InterruptedException e) {

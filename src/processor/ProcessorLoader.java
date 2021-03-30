@@ -16,11 +16,12 @@ public class ProcessorLoader {
     private static Logger logger = LoggerFactory.getLogger(ProcessorLoader.class);
 
     private volatile JRuntimeLoader jRuntimeLoader;
-
+    private Dispatcher dispatcher;
 //    String procFilePath = "resources";
     String procFile = "resources/processors.properties";
 
-    public ProcessorLoader() {
+    public ProcessorLoader(Dispatcher dispatcher) {
+        this.dispatcher = dispatcher;
         jRuntimeLoader = new JRuntimeLoader();
     }
 
@@ -37,14 +38,18 @@ public class ProcessorLoader {
         Iterator<Entry<Object, Object>> it = es.iterator();
         while (it.hasNext()) {
             Entry<Object, Object> entry = it.next();
-            String code = (String) entry.getKey();
-            String proc = (String) entry.getValue();
-            logger.info(code);
-            logger.info(proc);
+            String procCode = (String) entry.getKey();
+            String procClass = (String) entry.getValue();
+            logger.info(procCode);
+            logger.info(procClass);
             try {
+                int code = Integer.valueOf(procCode);
                 Class<?> cls;
-                cls = jRuntimeLoader.getClassLoader().loadClass(proc);
+                cls = jRuntimeLoader.getClassLoader().loadClass(procClass);
                 Object procObj = cls.newInstance();
+                Processor proc = Processor.class.cast(procObj);
+                proc.setCode(code);
+                dispatcher.add(code,proc);
                 logger.info(procObj.toString());
             } catch (Exception e) {
 

@@ -7,6 +7,7 @@ import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
+import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 
 public enum GroupManager {
@@ -14,7 +15,7 @@ public enum GroupManager {
 
     private final ConcurrentHashMap<String, ChannelGroup> groupMap = new ConcurrentHashMap<>();
 
-    private final ConcurrentHashMap<String, Channel> members = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, ClientInfo> members = new ConcurrentHashMap<>();
 
     public void sendToAll(String groupName, Object obj) {
         if (groupMap.containsKey(groupName)) {
@@ -46,20 +47,28 @@ public enum GroupManager {
                         }
                     });
         }
-        members.put(info.getChannelId(), info.getChannel());
+        members.put(info.getChannelId(), info);
     }
 
-    public void sendToAllMembers(Object obj) {
-        members.forEach((k, v) -> {
-            v.writeAndFlush(obj);
-        });
-    }
-
-    public boolean sendToMember(String id, Object obj) {
-        if (members.containsKey(id)) {
-            members.get(id).writeAndFlush(obj);
-            return true;
+    public void processAll() {
+        for (Iterator iterator = members.values().iterator(); iterator.hasNext(); ) {
+            ClientInfo info = (ClientInfo) iterator.next();
+            if (info != null) {
+                info.pollQuest();
+            }
         }
-        return false;
     }
+//    public void sendToAllMembers(Object obj) {
+//        members.forEach((k, v) -> {
+//            v.writeAndFlush(obj);
+//        });
+//    }
+//
+//    public boolean sendToMember(String id, Object obj) {
+//        if (members.containsKey(id)) {
+//            members.get(id).writeAndFlush(obj);
+//            return true;
+//        }
+//        return false;
+//    }
 }
