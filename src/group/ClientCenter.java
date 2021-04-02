@@ -1,21 +1,22 @@
 package group;
 
-import io.netty.channel.Channel;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-public enum GroupManager {
+public enum ClientCenter {
     INSTANCE;
 
     private final ConcurrentHashMap<String, ChannelGroup> groupMap = new ConcurrentHashMap<>();
 
-    private final ConcurrentHashMap<String, ClientInfo> members = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, Client> members = new ConcurrentHashMap<>();
 
     public void sendToAll(String groupName, Object obj) {
         if (groupMap.containsKey(groupName)) {
@@ -37,7 +38,7 @@ public enum GroupManager {
 
     }
 
-    public void addMember(ClientInfo info) {
+    public void addMember(Client info) {
         if (members.contains(info.getChannelId())) {
             info.getChannel().writeAndFlush(new Object())
                     .addListener(new GenericFutureListener<Future<? super Void>>() {
@@ -52,10 +53,32 @@ public enum GroupManager {
 
     public void processAll() {
         for (Iterator iterator = members.values().iterator(); iterator.hasNext(); ) {
-            ClientInfo info = (ClientInfo) iterator.next();
+            Client info = (Client) iterator.next();
             if (info != null) {
                 info.pollQuest();
             }
+        }
+    }
+
+    public enum Group {
+        INSTANCE;
+        private final Set<String> COMMON_GROUP = new HashSet<>();
+
+        public void add(String groupName) {
+            if (COMMON_GROUP.contains(groupName)) {
+                return;
+            }
+            COMMON_GROUP.add(groupName);
+        }
+
+        public Set<String> getAllGroup() {
+            Set<String> set = new HashSet<>();
+            set.addAll(COMMON_GROUP);
+            return set;
+        }
+
+        public Set<String> getCommonGroup() {
+            return COMMON_GROUP;
         }
     }
 //    public void sendToAllMembers(Object obj) {

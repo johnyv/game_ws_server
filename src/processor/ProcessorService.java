@@ -1,6 +1,6 @@
 package processor;
 
-import group.GroupManager;
+import group.ClientCenter;
 
 public class ProcessorService implements Runnable {
     private Thread serviceThread;
@@ -10,7 +10,7 @@ public class ProcessorService implements Runnable {
     public void run() {
         while (running) {
             try {
-                GroupManager.INSTANCE.processAll();
+                ClientCenter.INSTANCE.processAll();
             } catch (Throwable e) {
                 e.printStackTrace();
             }

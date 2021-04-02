@@ -8,8 +8,8 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
-public class ClientInfo {
-    public static final AttributeKey<ClientInfo> CHANNEL_INFO = AttributeKey.valueOf("channelInfo");
+public class Client {
+    public static final AttributeKey<Client> CHANNEL_INFO = AttributeKey.valueOf("channelInfo");
     private String channelId;
     private String uid;
     private ChannelHandlerContext ctx;
@@ -17,12 +17,12 @@ public class ClientInfo {
 
     private Queue<Runnable> quests = null;
 
-    public ClientInfo(ChannelHandlerContext ctx, String id) {
+    public Client(ChannelHandlerContext ctx, String id) {
         quests = new ConcurrentLinkedDeque<Runnable>();
         this.ctx = ctx;
         channelId = ctx.channel().id().asLongText();
         uid = id;
-        GroupManager.INSTANCE.addMember(this);
+        ClientCenter.INSTANCE.addMember(this);
     }
 
     public String getChannelId() {

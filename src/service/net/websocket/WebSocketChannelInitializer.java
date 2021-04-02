@@ -1,4 +1,4 @@
-package server;
+package service.net.websocket;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -7,13 +7,13 @@ import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.stream.ChunkedWriteHandler;
-import server.handler.WebSocketHandler;
+import service.net.websocket.handler.WebSocketHandler;
 
 
-public class GameServerInitializer extends ChannelInitializer<SocketChannel> {
+public class WebSocketChannelInitializer extends ChannelInitializer<SocketChannel> {
     private final SslContext sslCtx;
 
-    public GameServerInitializer(SslContext sslCtx) {
+    public WebSocketChannelInitializer(SslContext sslCtx) {
         this.sslCtx = sslCtx;
     }
 
@@ -38,6 +38,6 @@ public class GameServerInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast("http-chunked", new ChunkedWriteHandler());
 //        pipeline.addLast("encoder", new ProtoEncoder());
 //        pipeline.addLast("decoder", new ProtoDecoder());
-        pipeline.addLast(new WebSocketHandler("/wssLite"));
+        pipeline.addLast(new WebSocketHandler());
     }
 }

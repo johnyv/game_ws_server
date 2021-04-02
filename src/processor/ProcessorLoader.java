@@ -2,7 +2,7 @@ package processor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import server.loader.JRuntimeLoader;
+import bootstrap.server.loader.JRuntimeLoader;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -16,18 +16,21 @@ public class ProcessorLoader {
     private static Logger logger = LoggerFactory.getLogger(ProcessorLoader.class);
 
     private volatile JRuntimeLoader jRuntimeLoader;
+    private volatile ClassLoader loader;
     private Dispatcher dispatcher;
 //    String procFilePath = "resources";
     String procFile = "resources/processors.properties";
 
     public ProcessorLoader(Dispatcher dispatcher) {
+        loader = getClass().getClassLoader();
         this.dispatcher = dispatcher;
         jRuntimeLoader = new JRuntimeLoader();
     }
 
     public void load() throws IOException {
         Properties properties = new Properties();
-        InputStream inputStream = jRuntimeLoader.getClassLoader().getResourceAsStream(procFile);
+//        InputStream inputStream = jRuntimeLoader.getClassLoader().getResourceAsStream(procFile);
+        InputStream inputStream = loader.getResourceAsStream(procFile);
         if (inputStream == null) {
 //            throw new IOException("load file failed.");
             logger.info("try again");
@@ -45,7 +48,8 @@ public class ProcessorLoader {
             try {
                 int code = Integer.valueOf(procCode);
                 Class<?> cls;
-                cls = jRuntimeLoader.getClassLoader().loadClass(procClass);
+//                cls = jRuntimeLoader.getClassLoader().loadClass(procClass);
+                cls = loader.loadClass(procClass);
                 Object procObj = cls.newInstance();
                 Processor proc = Processor.class.cast(procObj);
                 proc.setCode(code);

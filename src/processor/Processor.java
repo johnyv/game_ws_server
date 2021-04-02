@@ -1,11 +1,9 @@
 package processor;
 
-import group.ClientInfo;
-import io.netty.channel.ChannelHandlerContext;
+import group.Client;
 import processor.data.RecvPacket;
 
 public abstract class Processor {
-    //    void init(ChannelHandlerContext ctx, byte[] bytes) throws Exception;
     protected int code = 0;
 
     public int getCode() {
@@ -16,7 +14,9 @@ public abstract class Processor {
         this.code = code;
     }
 
-    public abstract void process(ClientInfo client, RecvPacket packet) throws Exception;
+    protected abstract void init(Client client, RecvPacket packet) throws Exception;
+
+    public abstract void process(Client client, RecvPacket packet) throws Exception;
 
 //    void send(String msg);
 }

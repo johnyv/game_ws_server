@@ -1,4 +1,4 @@
-package server.loader;
+package bootstrap.server.loader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

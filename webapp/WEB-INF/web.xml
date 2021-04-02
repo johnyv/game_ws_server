@@ -5,6 +5,6 @@
 <web-app>
     <display-name>GameServer Web Application</display-name>
     <listener>
-        <listener-class>server.GameServerServletListener</listener-class>
+        <listener-class>bootstrap.server.GameServerServletListener</listener-class>
     </listener>
 </web-app>

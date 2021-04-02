@@ -1,6 +1,6 @@
 package processor;
 
-import group.ClientInfo;
+import group.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import processor.data.RecvPacket;
@@ -28,7 +28,7 @@ public class Dispatcher {
         return proc;
     }
 
-    public void dispatch(final ClientInfo info, final RecvPacket packet) {
+    public void dispatch(final Client info, final RecvPacket packet) {
         int code = packet.getCode();
         final Processor proc = get(code);
         if (proc == null) {
@@ -44,7 +44,7 @@ public class Dispatcher {
         info.addQuest(exec);
     }
 
-    private void process(final Processor proc, final ClientInfo info, final RecvPacket packet) {
+    private void process(final Processor proc, final Client info, final RecvPacket packet) {
         try {
             proc.process(info, packet);
         } catch (Exception e) {

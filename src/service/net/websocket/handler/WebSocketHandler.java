@@ -1,6 +1,6 @@
-package server.handler;
+package service.net.websocket.handler;
 
-import group.ClientInfo;
+import group.Client;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
@@ -16,16 +16,14 @@ import io.netty.util.CharsetUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import processor.data.RecvPacket;
-import server.GameServer;
-import utils.ByteUtil;
+import bootstrap.server.GameServer;
 
 public class WebSocketHandler extends ChannelInboundHandlerAdapter {
     private final Logger logger = LoggerFactory.getLogger(WebSocketHandler.class);
     private WebSocketServerHandshaker handShaker;
-    String websocket_path;
+    private static final String WEBSOCKET_PATH = "/websocket";
 
-    public WebSocketHandler(String path) {
-        this.websocket_path = path;
+    public WebSocketHandler() {
     }
 
     @Override
@@ -81,7 +79,7 @@ public class WebSocketHandler extends ChannelInboundHandlerAdapter {
             return;
         }
 
-        WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory("ws://" + ctx.channel() + websocket_path, null, false);
+        WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory("ws://" + ctx.channel() + WEBSOCKET_PATH, null, false);
         handShaker = wsFactory.newHandshaker(request);
 
         if (null == handShaker) {
@@ -115,7 +113,7 @@ public class WebSocketHandler extends ChannelInboundHandlerAdapter {
 
             try {
                 RecvPacket packet = new RecvPacket(bytes);
-                ClientInfo info = new ClientInfo(ctx, ctx.channel().id().asLongText());
+                Client info = new Client(ctx, ctx.channel().id().asLongText());
                 GameServer.dispatcher.dispatch(info, packet);
             } catch (Exception e) {
                 e.printStackTrace();

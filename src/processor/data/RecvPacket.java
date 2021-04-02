@@ -23,7 +23,7 @@ public class RecvPacket {
         }
         this.code = ByteUtil.bytes2Int(codeBytes);
 
-        byte[] dataBytes = new byte[bytes.length - 4];
+        byte[] dataBytes = new byte[bytes.length - 8];
         index = 0;
         for (i = 8; i < bytes.length; i++) {
             dataBytes[index++] = bytes[i];

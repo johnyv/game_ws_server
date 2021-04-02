@@ -1,4 +1,4 @@
-package server;
+package bootstrap.server;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -6,10 +6,9 @@ import javax.servlet.ServletContextListener;
 public class GameServerServletListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-
         try {
             GameServer server = GameServer.getInstance();
-            server.listen("127.0.0.1", 8090);
+            server.run();
         } catch (Exception e) {
             e.printStackTrace();
         }
