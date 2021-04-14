@@ -1,9 +1,10 @@
-package processor;
+package bootstrap.server.dispatcher;
 
 import group.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import processor.data.RecvPacket;
+import service.processor.Processor;
+import service.processor.packet.RecvPacket;
 
 import java.util.HashMap;
 import java.util.Map;

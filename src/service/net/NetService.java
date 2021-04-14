@@ -6,13 +6,13 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.ssl.SslContext;
 import org.slf4j.Logger;
 import service.IService;
-import service.net.tcp.TcpServerService;
+import service.net.netty.NettyServerService;
 import service.net.websocket.WebSocketChannelInitializer;
 
 public class NetService implements IService {
     private final Logger logger = Loggers.serverLogger;
 
-    private TcpServerService tcpServerService;
+    private NettyServerService webSocketServerService;
 
     private SslContext sslContext;
 
@@ -30,12 +30,12 @@ public class NetService implements IService {
     public void startup() throws Exception {
         webSocketChannelInitialer = new WebSocketChannelInitializer(sslContext);
 
-        tcpServerService = new TcpServerService("127.0.0.1", 8090, "net_tcp_boss", "net_tcp_worker", webSocketChannelInitialer);
-        tcpServerService.startService();
+        webSocketServerService = new NettyServerService("127.0.0.1", 8090, "net_tcp_boss", "net_tcp_worker", webSocketChannelInitialer);
+        webSocketServerService.startService();
     }
 
     @Override
     public void shutdown() throws Exception {
-
+        webSocketServerService.stopService();
     }
 }

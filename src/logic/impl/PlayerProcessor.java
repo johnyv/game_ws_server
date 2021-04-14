@@ -1,4 +1,4 @@
-package protobuf.impl;
+package logic.impl;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import group.Client;
@@ -8,10 +8,10 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import processor.Processor;
-import processor.data.RecvPacket;
-import processor.data.SendPacket;
-import protobuf.player.Player;
+import service.processor.Processor;
+import service.processor.packet.RecvPacket;
+import service.processor.packet.SendPacket;
+import logic.player.Player;
 
 public class PlayerProcessor extends Processor {
     private static Logger logger = LoggerFactory.getLogger(PlayerProcessor.class);

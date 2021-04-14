@@ -1,4 +1,4 @@
-package service.net.tcp;
+package service.net.netty;
 
 import common.constant.Loggers;
 import io.netty.bootstrap.ServerBootstrap;
@@ -18,7 +18,7 @@ import service.manager.ServiceManager;
 
 import java.net.InetSocketAddress;
 
-public class TcpServerService implements IServerService {
+public class NettyServerService implements IServerService {
     private final Logger logger = Loggers.serverLogger;
     public static final String SERVICE_ID = "TCP_SERVICE";
 
@@ -34,7 +34,7 @@ public class TcpServerService implements IServerService {
 
     private ChannelFuture serverChannelFuture;
 
-    public TcpServerService(String ip, int port, String bossTreadName, String workThreadName, ChannelInitializer initializer) {
+    public NettyServerService(String ip, int port, String bossTreadName, String workThreadName, ChannelInitializer initializer) {
         serverPort = port;
         serverAddr = new InetSocketAddress(ip, port);
         bossThreadNameFactory = new ThreadNameFactory(bossTreadName);

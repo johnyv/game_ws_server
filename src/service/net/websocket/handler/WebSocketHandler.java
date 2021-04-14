@@ -15,7 +15,7 @@ import io.netty.handler.codec.http.websocketx.*;
 import io.netty.util.CharsetUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import processor.data.RecvPacket;
+import service.processor.packet.RecvPacket;
 import bootstrap.server.GameServer;
 
 public class WebSocketHandler extends ChannelInboundHandlerAdapter {

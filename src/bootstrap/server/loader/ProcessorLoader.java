@@ -1,8 +1,9 @@
-package processor;
+package bootstrap.server.loader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import bootstrap.server.loader.JRuntimeLoader;
+import bootstrap.server.dispatcher.Dispatcher;
+import service.processor.Processor;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,24 +16,20 @@ import java.util.Set;
 public class ProcessorLoader {
     private static Logger logger = LoggerFactory.getLogger(ProcessorLoader.class);
 
-    private volatile JRuntimeLoader jRuntimeLoader;
     private volatile ClassLoader loader;
     private Dispatcher dispatcher;
-//    String procFilePath = "resources";
+
     String procFile = "resources/processors.properties";
 
     public ProcessorLoader(Dispatcher dispatcher) {
         loader = getClass().getClassLoader();
         this.dispatcher = dispatcher;
-        jRuntimeLoader = new JRuntimeLoader();
     }
 
     public void load() throws IOException {
         Properties properties = new Properties();
-//        InputStream inputStream = jRuntimeLoader.getClassLoader().getResourceAsStream(procFile);
         InputStream inputStream = loader.getResourceAsStream(procFile);
         if (inputStream == null) {
-//            throw new IOException("load file failed.");
             logger.info("try again");
             inputStream = new FileInputStream(procFile);
         }
@@ -48,12 +45,11 @@ public class ProcessorLoader {
             try {
                 int code = Integer.valueOf(procCode);
                 Class<?> cls;
-//                cls = jRuntimeLoader.getClassLoader().loadClass(procClass);
                 cls = loader.loadClass(procClass);
                 Object procObj = cls.newInstance();
                 Processor proc = Processor.class.cast(procObj);
                 proc.setCode(code);
-                dispatcher.add(code,proc);
+                dispatcher.add(code, proc);
                 logger.info(procObj.toString());
             } catch (Exception e) {
 

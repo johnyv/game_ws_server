@@ -1,4 +1,4 @@
-package processor;
+package service.processor;
 
 import group.ClientCenter;
 

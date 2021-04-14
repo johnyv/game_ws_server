@@ -1,7 +1,7 @@
-package processor;
+package service.processor;
 
 import group.Client;
-import processor.data.RecvPacket;
+import service.processor.packet.RecvPacket;
 
 public abstract class Processor {
     protected int code = 0;

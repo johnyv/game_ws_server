@@ -1,7 +1,7 @@
 syntax ="proto3";
 package user;
 
-option java_package="protobuf.player";
+option java_package="logic.player";
 option java_multiple_files=true;
 
 message Player{

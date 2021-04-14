@@ -1,30 +1,11 @@
 package bootstrap.server;
 
 import common.constant.Loggers;
-import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.epoll.Epoll;
-import io.netty.channel.epoll.EpollEventLoopGroup;
-import io.netty.channel.epoll.EpollServerSocketChannel;
-import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.logging.LogLevel;
-import io.netty.handler.logging.LoggingHandler;
-import io.netty.handler.ssl.SslContext;
-import io.netty.handler.ssl.SslContextBuilder;
-import io.netty.handler.ssl.util.SelfSignedCertificate;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import processor.Dispatcher;
-import processor.ProcessorLoader;
-import processor.ProcessorService;
 import service.net.NetService;
-import service.net.tcp.TcpServerService;
-import service.net.websocket.WebSocketChannelInitializer;
-
-import java.net.InetSocketAddress;
+import bootstrap.server.dispatcher.Dispatcher;
+import bootstrap.server.loader.ProcessorLoader;
+import service.processor.ProcessorService;
 
 public class GameServer {
     static final boolean SSL = System.getProperty("ssl") != null;
