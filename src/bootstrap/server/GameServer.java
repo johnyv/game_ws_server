@@ -17,7 +17,7 @@ public class GameServer {
 
     protected NetService netService;
 
-    public static Dispatcher dispatcher = new Dispatcher();
+//    public static Dispatcher dispatcher = new Dispatcher();
     public static ProcessorLoader processorLoader;
     public static ProcessorService processorService;
 
@@ -32,7 +32,7 @@ public class GameServer {
     private void start() throws Exception {
         netService.startup();
 
-        processorLoader = new ProcessorLoader(dispatcher);
+        processorLoader = new ProcessorLoader();
         processorLoader.load();
 
         processorService = new ProcessorService();
@@ -58,7 +58,7 @@ public class GameServer {
 //
 //        try {
 //            bootstrap = new ServerBootstrap();
-//            bootstrap.group(bossGroup, workerGroup)
+//            bootstrap.session(bossGroup, workerGroup)
 //                    .option(ChannelOption.SO_BACKLOG, 1024)
 //                    .option(ChannelOption.SO_REUSEADDR, true)
 //                    .childOption(ChannelOption.SO_REUSEADDR, true);

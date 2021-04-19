@@ -1,6 +1,6 @@
 package bootstrap.server.dispatcher;
 
-import group.Client;
+import session.client.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.processor.Processor;
@@ -11,7 +11,11 @@ import java.util.Map;
 
 public class Dispatcher {
     protected final static Logger logger = LoggerFactory.getLogger(Dispatcher.class);
+    private static Dispatcher instance = new Dispatcher();
+
     Map<Integer, Processor> processors = null;
+
+    public static Dispatcher getInstance() { return instance; }
 
     public Dispatcher() {
         processors = new HashMap<Integer, Processor>();

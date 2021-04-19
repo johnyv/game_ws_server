@@ -1,6 +1,7 @@
 package service.net.websocket.handler;
 
-import group.Client;
+import bootstrap.server.dispatcher.Dispatcher;
+import session.client.Client;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
@@ -16,7 +17,6 @@ import io.netty.util.CharsetUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.processor.packet.RecvPacket;
-import bootstrap.server.GameServer;
 
 public class WebSocketHandler extends ChannelInboundHandlerAdapter {
     private final Logger logger = LoggerFactory.getLogger(WebSocketHandler.class);
@@ -113,8 +113,8 @@ public class WebSocketHandler extends ChannelInboundHandlerAdapter {
 
             try {
                 RecvPacket packet = new RecvPacket(bytes);
-                Client info = new Client(ctx, ctx.channel().id().asLongText());
-                GameServer.dispatcher.dispatch(info, packet);
+                Client info = new Client(ctx);
+                Dispatcher.getInstance().dispatch(info, packet);
             } catch (Exception e) {
                 e.printStackTrace();
                 logger.error("parse failed.");

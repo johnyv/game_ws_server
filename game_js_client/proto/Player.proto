@@ -1,0 +1,11 @@
+syntax ="proto3";
+package user;
+
+option java_package="src.proto";
+option java_multiple_files=true;
+
+message Player{
+    uint32 id = 1;
+    string name = 2;
+    uint64 enterTime = 3;
+}

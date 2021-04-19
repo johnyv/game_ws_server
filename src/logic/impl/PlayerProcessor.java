@@ -1,7 +1,7 @@
 package logic.impl;
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import group.Client;
+import session.client.Client;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
@@ -45,9 +45,7 @@ public class PlayerProcessor extends Processor {
         logger.info("time:"+player.getEnterTime());
 
         SendPacket pack = new SendPacket(packet.getCode(), player);
-        ByteBuf buf = Unpooled.copiedBuffer(pack.getData());
-
-        client.getChannel().writeAndFlush(new BinaryWebSocketFrame(buf));
+        client.write(pack);
     }
 
 //    @Override

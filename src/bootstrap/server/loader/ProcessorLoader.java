@@ -17,13 +17,13 @@ public class ProcessorLoader {
     private static Logger logger = LoggerFactory.getLogger(ProcessorLoader.class);
 
     private volatile ClassLoader loader;
-    private Dispatcher dispatcher;
+//    private Dispatcher dispatcher;
 
     String procFile = "resources/processors.properties";
 
-    public ProcessorLoader(Dispatcher dispatcher) {
+    public ProcessorLoader() {
         loader = getClass().getClassLoader();
-        this.dispatcher = dispatcher;
+//        this.dispatcher = dispatcher;
     }
 
     public void load() throws IOException {
@@ -49,7 +49,7 @@ public class ProcessorLoader {
                 Object procObj = cls.newInstance();
                 Processor proc = Processor.class.cast(procObj);
                 proc.setCode(code);
-                dispatcher.add(code, proc);
+                Dispatcher.getInstance().add(code, proc);
                 logger.info(procObj.toString());
             } catch (Exception e) {
 

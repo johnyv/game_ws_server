@@ -1,17 +1,18 @@
-package group;
+package session.manager;
 
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 import io.netty.util.concurrent.GlobalEventExecutor;
+import session.client.Client;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-public enum ClientCenter {
+public enum ClientManager {
     INSTANCE;
 
     private final ConcurrentHashMap<String, ChannelGroup> groupMap = new ConcurrentHashMap<>();

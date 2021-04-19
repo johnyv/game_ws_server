@@ -1,6 +1,6 @@
 package service.processor;
 
-import group.Client;
+import session.client.Client;
 import service.processor.packet.RecvPacket;
 
 public abstract class Processor {

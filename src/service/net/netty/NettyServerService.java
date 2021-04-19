@@ -20,7 +20,7 @@ import java.net.InetSocketAddress;
 
 public class NettyServerService implements IServerService {
     private final Logger logger = Loggers.serverLogger;
-    public static final String SERVICE_ID = "TCP_SERVICE";
+    public static final String SERVICE_ID = "NETTY_SERVER_SERVICE";
 
     private int serverPort;
     private InetSocketAddress serverAddr;
