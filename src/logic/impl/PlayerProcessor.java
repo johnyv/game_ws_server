@@ -1,17 +1,14 @@
 package logic.impl;
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import session.client.Client;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
+import logic.protocol.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.processor.Processor;
 import service.processor.packet.RecvPacket;
 import service.processor.packet.SendPacket;
-import logic.player.Player;
+import session.client.Client;
 
 public class PlayerProcessor extends Processor {
     private static Logger logger = LoggerFactory.getLogger(PlayerProcessor.class);
@@ -19,14 +16,15 @@ public class PlayerProcessor extends Processor {
     protected ChannelHandlerContext ctx;
 
     Player player;
+
     public PlayerProcessor() {
     }
 
     @Override
-    protected void init(Client client, RecvPacket packet)  {
+    protected void init(Client client, RecvPacket packet) {
         try {
             player = Player.parseFrom(packet.getData());
-        }catch (InvalidProtocolBufferException e){
+        } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
     }
@@ -36,13 +34,13 @@ public class PlayerProcessor extends Processor {
         logger.info("process player...");
         init(client, packet);
 
-        logger.info("length:"+packet.getLength());
-        logger.info("code:"+packet.getCode());
+        logger.info("length:" + packet.getLength());
+        logger.info("code:" + packet.getCode());
 
-        logger.info("id:"+player.getId());
+        logger.info("id:" + player.getId());
         String name = player.getName();
-        logger.info("name:"+name);
-        logger.info("time:"+player.getEnterTime());
+        logger.info("name:" + name);
+        logger.info("time:" + player.getEnterTime());
 
         SendPacket pack = new SendPacket(packet.getCode(), player);
         client.write(pack);

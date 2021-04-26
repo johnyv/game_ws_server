@@ -1,5 +1,5 @@
 syntax ="proto3";
-package user;
+package protocol;
 
 option java_package="logic.protocol";
 option java_multiple_files=true;
@@ -17,4 +17,5 @@ message HeartBeat{
 	int64 system_currtime = 1;
 }
 
+//protoc --js_out=import_style=commonjs,binary:./ Protocol.proto
 //protoc --java_out=../ Protocol.proto

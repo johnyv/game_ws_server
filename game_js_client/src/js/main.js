@@ -1,4 +1,4 @@
-require('../../proto/Player_pb');
+require('../../proto/Protocol_pb');
 var $ = require('jquery');
 
 var websocket;
@@ -44,9 +44,19 @@ function conn(url) {
                     var c = new DataView(bytes.slice(4,8));
                     var code = c.getInt32(0);
                     console.log("code:"+code);
+                    switch (code){
+                        case 1001:
+                            var message = proto.protocol.Player.deserializeBinary(bytes.slice(8));
+                            $('#server').prepend(message.getId() + '-->' + message.getName() + '-->' + message.getEntertime() + '<br /> ');
+                            break;
+                        case 1002:
+                            var message = proto.protocol.HeartBeat.deserializeBinary(bytes.slice(8));
+                            $('#server').prepend('time-->' + message.getSystemCurrtime() + '<br /> ');
+                            break;
+                        default:
+                            break;
+                    }
                     // console.log(bytes);
-                    var message = proto.user.Player.deserializeBinary(bytes.slice(8));
-                    $('#server').prepend(message.getId() + '-->' + message.getName() + '-->' + message.getEntertime() + '<br /> ');
                 });
                 reader.readAsArrayBuffer(data);
             } else if (data instanceof ArrayBuffer) {
@@ -58,12 +68,30 @@ function conn(url) {
 
 function send(message) {
     // reqtime = reqtime +1;
-    websocket.send(message);
+    var msg = new proto.protocol.HeartBeat();
+    var d = new Date();
+
+    msg.setSystemCurrtime(d.getTime());
+
+    let bytes = msg.serializeBinary();
+    console.log(bytes);
+
+    let buf = new ArrayBuffer(bytes.length + 8);
+
+    let b = new DataView(buf);
+    b.setInt32(0,bytes.length + 8)
+    b.setUint32(4, 1002);
+
+
+    for (let i = 0; i < bytes.length; i++) {
+        b.setUint8(i + 8, bytes[i]);
+    }
+    websocket.send(b);
 }
 
 function sendBin(userid, txt) {
     // reqtime = reqtime +1;
-    var message = new proto.user.Player();
+    var message = new proto.protocol.Player();
     // message.setType(proto.WSMessage.MsgType.MSG);
     // message.setMid(reqtime);
     message.setId(1);
@@ -106,6 +134,27 @@ function broadCast(groupName, txt) {
     // message.setTxt(txt);
     // bytes = message.serializeBinary();
     // websocket.send(bytes);
+}
+
+var heartCheck = {
+    timeout: 60000,//60ms
+    timeoutObj: null,
+    serverTimeoutObj: null,
+    reset: function(){
+        clearTimeout(this.timeoutObj);
+        clearTimeout(this.serverTimeoutObj);
+        this.start();
+    },
+    start: function(){
+        var self = this;
+        this.timeoutObj = setTimeout(function(){
+            websocket.send("HeartBeat");
+            self.serverTimeoutObj = setTimeout(function(){
+                //如果onclose会执行reconnect，我们执行ws.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次
+                websocket.close();
+            }, self.timeout)
+        }, this.timeout)
+    },
 }
 
 function closeWebsocket() {
