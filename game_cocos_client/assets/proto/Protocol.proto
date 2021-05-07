@@ -1,0 +1,25 @@
+syntax ="proto3";
+package protocol;
+
+option java_package="logic.protocol";
+option java_multiple_files=true;
+option java_outer_classname = "Protocol";
+
+message Player{
+    uint32 id = 1;
+    string name = 2;
+    uint64 enterTime = 3;
+}
+
+// 心跳测试
+message HeartBeat{
+	//服务器当前时间
+	int64 system_currtime = 1;
+}
+
+//protoc --js_out=import_style=commonjs,binary:./ Protocol.proto
+
+//pbjs -t static-module -w commonjs -o proto.js *.proto
+//pbts -o proto.d.ts proto.js
+
+//protoc --java_out=../ Protocol.proto
