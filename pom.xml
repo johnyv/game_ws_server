@@ -4,16 +4,32 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>game.websocket.server</groupId>
-    <artifactId>game_ws_server</artifactId>
+    <groupId>com.server</groupId>
+    <artifactId>server</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
+    <modules>
+        <module>module_core</module>
+        <module>module_db</module>
+        <module>game_server</module>
+    </modules>
+
+    <profiles>
+        <profile>
+            <id>production</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <jdk>1.8</jdk>
+            </activation>
+            <properties>
+                <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+                <maven.compiler.source>1.8</maven.compiler.source>
+                <maven.compiler.target>1.8</maven.compiler.target>
+                <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+            </properties>
+        </profile>
+    </profiles>
 
     <dependencies>
         <dependency>
@@ -38,33 +54,5 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <finalName>game_ws_project</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.2</version>
-                <configuration>
-                    <webResources>
-                        <resource>
-                            <directory>webapp</directory>
-                        </resource>
-                    </webResources>
-                </configuration>
-            </plugin>
-        </plugins>
-        <sourceDirectory>src</sourceDirectory>
-        <resources>
-            <resource>
-                <directory>resources</directory>
-                <targetPath>resources</targetPath>
-                <includes>
-                    <include>**/*.properties</include>
-                    <include>**/*.xml</include>
-                </includes>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-    </build>
+
 </project>
