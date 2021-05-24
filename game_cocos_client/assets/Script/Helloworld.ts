@@ -1,7 +1,9 @@
 const { ccclass, property } = cc._decorator;
 
 import { protocol } from "../proto/proto";
+import HeartBeat = protocol.HeartBeat;
 import Player = protocol.Player;
+
 import { netHandler } from "./net/NetHandler";
 @ccclass
 export default class Helloworld extends cc.Component {
@@ -21,13 +23,12 @@ export default class Helloworld extends cc.Component {
     onLoad() {
         // cc.director.loadScene("startup");
         let self = this;
-        let msg = Player.create({
-            name: "test",
-            id: 123, enterTime: new Date().getTime()
+        let msg = HeartBeat.create({
+            systemCurrtime: new Date().getTime()
         });
-        let buf = Player.encode(msg).finish();
+        let buf = HeartBeat.encode(msg).finish();
         this.scheduleOnce(() => {
-            let decoded = Player.decode(buf);
+            let decoded = HeartBeat.decode(buf);
             cc.log("--->", buf);
             cc.log(decoded);
         }, 2);
@@ -35,7 +36,7 @@ export default class Helloworld extends cc.Component {
         var arrayBuf = new ArrayBuffer(buf.length+8);
         var databuf = new DataView(arrayBuf);
         databuf.setInt32(0, buf.length+8);
-        databuf.setUint32(4,1002);
+        databuf.setUint32(4,1001);
 
         for(var i =0; i < buf.length; i++){
             databuf.setUint8(i+8, buf[i]);
@@ -49,10 +50,11 @@ export default class Helloworld extends cc.Component {
         // });
 
         this.schedule(() => {
-            cc.log("=>" + netHandler.isConnected);
+            // cc.log("=>" + netHandler.isConnected);
             if (netHandler.isConnected) {
-                cc.log("send...");
-                netHandler.send("test...");
+                netHandler.send(databuf);
+                // cc.log("send...");
+                // netHandler.send("test...");
             }
         }, 3);
     }

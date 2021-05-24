@@ -3,6 +3,8 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/game_server/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/game_server/src" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/module_core/src" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/server_module_core/src" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/server_module_db/src" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/server_module_utils/src" charset="UTF-8" />
   </component>
 </project>

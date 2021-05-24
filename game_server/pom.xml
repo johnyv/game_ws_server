@@ -4,33 +4,28 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-<!--    <parent>-->
-<!--        <artifactId>server</artifactId>-->
-<!--        <groupId>com.server</groupId>-->
-<!--        <version>1.0-SNAPSHOT</version>-->
-<!--    </parent>-->
+    <parent>
+        <artifactId>server</artifactId>
+        <groupId>com.server</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
     <groupId>game.server</groupId>
     <artifactId>game_server</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
-    </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>game.module.core</groupId>
-                <artifactId>module_core</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>server.module.core</groupId>
+            <artifactId>server_module_core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>server.module.db</groupId>
+            <artifactId>server_module_db</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <finalName>game_server</finalName>

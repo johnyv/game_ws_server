@@ -7,15 +7,18 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="game_ws_server" />
-        <module name="module_core" />
+        <module name="server_module_db" />
+        <module name="server_module_utils" />
         <module name="game_server" />
-        <module name="db_server" />
-        <module name="module_db" />
+        <module name="server_module_core" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="common_db" target="8" />
       <module name="common_netty" target="8" />
+      <module name="db_server" target="8" />
+      <module name="module_core" target="1.8" />
+      <module name="module_db" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

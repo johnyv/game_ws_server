@@ -10,7 +10,7 @@ export default class Startup extends cc.Component {
 
     onLoad() {
         // this.netHandler = NetHandler.getInstance();
-        netHandler.init("ws://127.0.0.1:8090/websocket");
+        netHandler.init("ws://127.0.0.1:8090/ws");
         netHandler.connect(() => {
             cc.log("websocket connected.");
             cc.director.loadScene("helloworld");

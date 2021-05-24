@@ -4335,7 +4335,7 @@ declare namespace cc {
 		constructor(name?: string);	
 	}	
 	/** !#en
-	cc.Scene is a subclass of cc.Node that is used only as an abstract concept.<br/>
+	cc.Scene is a subclass of cc.Node that is used only as an abstracted concept.<br/>
 	cc.Scene and cc.Node are almost identical with the difference that users can not modify cc.Scene manually.
 	!#zh
 	cc.Scene 是 cc.Node 的子类，仅作为一个抽象的概念。<br/>
