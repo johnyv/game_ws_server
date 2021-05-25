@@ -112,7 +112,7 @@ public class WebSocketHandler extends ChannelInboundHandlerAdapter {
             bFrame.content().readBytes(bytes);
 
             try {
-                MsgPack pack = new MsgPack(bytes);
+                MsgPack pack = MsgPack.unPack(bytes);
                 Session session = new Session(ctx);
                 Dispatcher.getInstance().dispatch(session, pack);
             } catch (Exception e) {

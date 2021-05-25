@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import abstracted.Processor;
 import packet.MsgPack;
-import packet.SendPacket;
 import session.Session;
 
 public class PlayerProcessor extends Processor {
@@ -42,8 +41,8 @@ public class PlayerProcessor extends Processor {
         logger.info("name:" + name);
         logger.info("time:" + player.getEnterTime());
 
-        SendPacket pack = new SendPacket(packet.getCode(), player);
-        session.write(pack);
+        byte[] bytes = MsgPack.pack(packet.getCode(), player);
+        session.write(bytes);
     }
 
 //    @Override

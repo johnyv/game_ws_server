@@ -3,7 +3,6 @@ package logic.proc;
 import logic.protocol.HeartBeat;
 import abstracted.Processor;
 import packet.MsgPack;
-import packet.SendPacket;
 import session.Session;
 
 public class HeartBeatProcessor extends Processor {
@@ -22,7 +21,7 @@ public class HeartBeatProcessor extends Processor {
         HeartBeat.Builder hbr = HeartBeat.newBuilder();
         hbr.setSystemCurrtime(System.currentTimeMillis());
 
-        SendPacket p = new SendPacket(1001, hbr.build());
-        session.write(p);
+        byte[] bytes = MsgPack.pack(1001, hbr.build());
+        session.write(bytes);
     }
 }

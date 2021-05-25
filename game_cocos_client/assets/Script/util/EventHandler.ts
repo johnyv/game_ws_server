@@ -11,18 +11,20 @@ export default class EventHandler {
         return this.instance;
     }
 
-    public emit(event: PropertyKey): void {
+    public emit(event: PropertyKey, data: any): void {
         var handler: any;
         if (this.listener.hasOwnProperty(event)) {
             var event_list = this.listener[event];
             for (var i = 0; i < event_list.length; ++i) {
                 handler = event_list[i];
-                var args = [];
+                // var args = [];
 
-                for (var n = 1; n < arguments.length; ++n) {
-                    args.push(arguments[n]);
-                }
-                handler.apply(this, args);
+                // for (var n = 1; n < arguments.length; ++n) {
+                //     args.push(arguments[n]);
+                // }
+                // cc.log("call fun===>", handler);
+                // cc.log("args===>", data);
+                handler.apply(this, [data]);
             }
         }
     }

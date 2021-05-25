@@ -33,8 +33,6 @@ class NetHandler {
             }
         };
         this.webSocket.onmessage = function (event: MessageEvent) {
-            cc.log("onmessage");
-            cc.log(event);
             self.process(event);
         };
         this.webSocket.onerror = function (event: Event) { };
@@ -65,7 +63,17 @@ class NetHandler {
     private process(event: MessageEvent): void {
         cc.log("process---event.data");
         cc.log(event.data);
-        this.handler.emit(event.data);
+        var dataBytes = event.data;
+        var lengthBytes = new DataView(dataBytes.slice(0,4));
+        var length = lengthBytes.getInt32(0);
+        cc.log("length->",length);
+
+        var codeBytes = new DataView(dataBytes.slice(4,8));
+        var code = codeBytes.getInt32(0);
+        cc.log("code->",code);
+
+        var buf = dataBytes.slice(8);
+        this.handler.emit(code, buf);
     }
 }
 

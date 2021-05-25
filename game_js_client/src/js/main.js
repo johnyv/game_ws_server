@@ -45,11 +45,11 @@ function conn(url) {
                     var code = c.getInt32(0);
                     console.log("code:"+code);
                     switch (code){
-                        case 1001:
+                        case 1002:
                             var message = proto.protocol.Player.deserializeBinary(bytes.slice(8));
                             $('#server').prepend(message.getId() + '-->' + message.getName() + '-->' + message.getEntertime() + '<br /> ');
                             break;
-                        case 1002:
+                        case 1001:
                             var message = proto.protocol.HeartBeat.deserializeBinary(bytes.slice(8));
                             $('#server').prepend('time-->' + message.getSystemCurrtime() + '<br /> ');
                             break;
@@ -80,7 +80,7 @@ function send(message) {
 
     let b = new DataView(buf);
     b.setInt32(0,bytes.length + 8)
-    b.setUint32(4, 1002);
+    b.setUint32(4, 1001);
 
 
     for (let i = 0; i < bytes.length; i++) {
@@ -104,7 +104,7 @@ function sendBin(userid, txt) {
 
     let b = new DataView(buf);
     b.setInt32(0,bytes.length + 8)
-    b.setUint32(4, 1001);
+    b.setUint32(4, 1002);
 
 
     for (let i = 0; i < bytes.length; i++) {
@@ -198,7 +198,7 @@ $('#Clear_Button').click(function () {
 $('#Open_Button').click(function () {
     var uid = $('#uid').val();
     var pwd = $('#pwd').val();
-    var url = "ws://127.0.0.1:8090/websocket";
+    var url = "ws://127.0.0.1:8090/ws";
     conn(url);
 });
 

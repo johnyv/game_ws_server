@@ -5,7 +5,6 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
-import packet.SendPacket;
 
 import java.util.Queue;
 import java.util.Set;
@@ -64,9 +63,9 @@ public class Session {
         return false;
     }
 
-    public void write(SendPacket packet) {
+    public void write(byte[] bytes) {
         if (channel != null) {
-            ByteBuf buf = Unpooled.copiedBuffer(packet.getData());
+            ByteBuf buf = Unpooled.copiedBuffer(bytes);
             channel.writeAndFlush(new BinaryWebSocketFrame(buf));
         }
     }
