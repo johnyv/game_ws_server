@@ -1,11 +1,11 @@
-import EventHandler from "../util/EventHandler";
+import { EVENTS } from "../util/EventHandler";
+import MsgPack from "../util/MsgPack";
 
 class NetHandler {
     private static instance: NetHandler;
 
     private webSocket: WebSocket;
     private address: string;
-    private handler: EventHandler;
     public isConnected: boolean;
     constructor() {
     }
@@ -17,7 +17,6 @@ class NetHandler {
 
     public init(address: string): void {
         this.address = address;
-        this.handler = EventHandler.getInstance();
         this.isConnected = false;
         this.webSocket = null;
     }
@@ -38,7 +37,6 @@ class NetHandler {
         this.webSocket.onerror = function (event: Event) { };
 
         this.webSocket.onclose = function (event: CloseEvent) {
-            self.handler.removeAllListeners();
             self.close();
         };
     }
@@ -61,20 +59,11 @@ class NetHandler {
     }
 
     private process(event: MessageEvent): void {
-        cc.log("process---event.data");
-        cc.log(event.data);
-        var dataBytes = event.data;
-        var lengthBytes = new DataView(dataBytes.slice(0,4));
-        var length = lengthBytes.getInt32(0);
-        cc.log("length->",length);
+        var arrBuf = event.data;
 
-        var codeBytes = new DataView(dataBytes.slice(4,8));
-        var code = codeBytes.getInt32(0);
-        cc.log("code->",code);
-
-        var buf = dataBytes.slice(8);
-        this.handler.emit(code, buf);
+        var msg = MsgPack.unpack(arrBuf);
+        EVENTS.emit(msg.code, msg.dataBytes);
     }
 }
 
-export const netHandler = NetHandler.getInstance();
+export const NET = NetHandler.getInstance();

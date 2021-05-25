@@ -4,76 +4,57 @@ import { protocol } from "../proto/proto";
 import HeartBeat = protocol.HeartBeat;
 import Player = protocol.Player;
 
-import EventHandler from "./util/EventHandler";
+import { NET } from "./net/NetHandler";
+import { EVENTS } from "./util/EventHandler";
+import MsgPack from "./util/MsgPack";
 
-import { netHandler } from "./net/NetHandler";
 @ccclass
 export default class Helloworld extends cc.Component {
+    @property(cc.Sprite)
+    cocos: cc.Sprite = null;
 
     @property(cc.Label)
     label: cc.Label = null;
 
     @property
     text: string = 'hello';
-    handler: EventHandler;
-    // netHandler:NetHandler = NetHandler.getInstance();
 
     start() {
         // init logic
         this.label.string = this.text;
+        cc.log(this.cocos);
     }
 
     onLoad() {
-        // cc.director.loadScene("startup");
         let self = this;
-        this.handler = EventHandler.getInstance();
-        // self.netHandler = NetHandler.getInstance();
-        // this.netHandler.init("ws://127.0.0.1:8090/websocket");
-        // this.netHandler.connect(()=>{
-        // self.netHandler.send("test...");
-        // });
 
-        this.handler.on(1001, this.onHeart);
+        EVENTS.on(1001, this.onHeart);
 
         this.schedule(() => {
-            // cc.log("=>" + netHandler.isConnected);
-            if (netHandler.isConnected) {
-                let buf = self.packData();
-                netHandler.send(buf);
-                // cc.log("send...");
-                // netHandler.send("test...");
+            if (NET.isConnected) {
+                let msg = HeartBeat.create({
+                    systemCurrtime: new Date().getTime()
+                });
+                let uint8Arr = HeartBeat.encode(msg).finish();
+
+                let msgBuf = MsgPack.pack(1001, uint8Arr);
+                NET.send(msgBuf);
             }
         }, 3);
+
+        this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd.bind(this));
     }
 
-    onHeart(data:any){
-        cc.log("--->",data);
-        var buf = new Uint8Array(data);
-        let decoded = HeartBeat.decode(buf);
-        cc.log("--->");
+    onHeart(data: Uint8Array) {
+        let decoded = HeartBeat.decode(data);
         cc.log(decoded);
     }
 
-    packData(){
-        let msg = HeartBeat.create({
-            systemCurrtime: new Date().getTime()
-        });
-        let buf = HeartBeat.encode(msg).finish();
-        this.scheduleOnce(() => {
-            let decoded = HeartBeat.decode(buf);
-            // cc.log("--->", buf);
-            // cc.log(decoded);
-        }, 2);
-
-        var arrayBuf = new ArrayBuffer(buf.length+8);
-        var databuf = new DataView(arrayBuf);
-        databuf.setInt32(0, buf.length+8);
-        databuf.setUint32(4,1001);
-
-        for(var i =0; i < buf.length; i++){
-            databuf.setUint8(i+8, buf[i]);
-        }
-
-        return databuf;
+    onTouchEnd(event: cc.Event.EventTouch) {
+        cc.log(event.getLocationX(), event.getLocationY());
+        var pt = new cc.Vec2(event.getLocationX() - 480, event.getLocationY() - 320);
+        this.cocos.node.runAction(
+            cc.moveTo(1, pt)
+        );
     }
 }
