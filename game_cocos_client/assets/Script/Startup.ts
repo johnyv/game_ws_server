@@ -1,17 +1,14 @@
 const { ccclass, property } = cc._decorator;
-import { netHandler } from "./net/NetHandler";
+import { NET } from "./net/NetHandler";
 
 @ccclass
 export default class Startup extends cc.Component {
 
-    //netHandler:NetHandler = NetHandler.getInstance();
-
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-        // this.netHandler = NetHandler.getInstance();
-        netHandler.init("ws://127.0.0.1:8090/ws");
-        netHandler.connect(() => {
+        NET.init("ws://127.0.0.1:8090/ws");
+        NET.connect(() => {
             cc.log("websocket connected.");
             cc.director.loadScene("helloworld");
         });

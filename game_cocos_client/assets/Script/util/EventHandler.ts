@@ -1,4 +1,4 @@
-export default class EventHandler {
+class EventHandler {
     private static instance: EventHandler;
     private listener: Object;
 
@@ -51,3 +51,5 @@ export default class EventHandler {
         this.listener = {};
     }
 }
+
+export const EVENTS = EventHandler.getInstance();
