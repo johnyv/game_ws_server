@@ -465,6 +465,238 @@ $root.protocol = (function() {
         return HeartBeat;
     })();
 
+    protocol.Motion = (function() {
+
+        /**
+         * Properties of a Motion.
+         * @memberof protocol
+         * @interface IMotion
+         * @property {number|null} [uid] Motion uid
+         * @property {number|null} [x] Motion x
+         * @property {number|null} [y] Motion y
+         */
+
+        /**
+         * Constructs a new Motion.
+         * @memberof protocol
+         * @classdesc Represents a Motion.
+         * @implements IMotion
+         * @constructor
+         * @param {protocol.IMotion=} [properties] Properties to set
+         */
+        function Motion(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Motion uid.
+         * @member {number} uid
+         * @memberof protocol.Motion
+         * @instance
+         */
+        Motion.prototype.uid = 0;
+
+        /**
+         * Motion x.
+         * @member {number} x
+         * @memberof protocol.Motion
+         * @instance
+         */
+        Motion.prototype.x = 0;
+
+        /**
+         * Motion y.
+         * @member {number} y
+         * @memberof protocol.Motion
+         * @instance
+         */
+        Motion.prototype.y = 0;
+
+        /**
+         * Creates a new Motion instance using the specified properties.
+         * @function create
+         * @memberof protocol.Motion
+         * @static
+         * @param {protocol.IMotion=} [properties] Properties to set
+         * @returns {protocol.Motion} Motion instance
+         */
+        Motion.create = function create(properties) {
+            return new Motion(properties);
+        };
+
+        /**
+         * Encodes the specified Motion message. Does not implicitly {@link protocol.Motion.verify|verify} messages.
+         * @function encode
+         * @memberof protocol.Motion
+         * @static
+         * @param {protocol.IMotion} message Motion message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Motion.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.uid);
+            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+                writer.uint32(/* id 2, wireType 5 =*/21).float(message.x);
+            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+                writer.uint32(/* id 3, wireType 5 =*/29).float(message.y);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified Motion message, length delimited. Does not implicitly {@link protocol.Motion.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof protocol.Motion
+         * @static
+         * @param {protocol.IMotion} message Motion message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Motion.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a Motion message from the specified reader or buffer.
+         * @function decode
+         * @memberof protocol.Motion
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {protocol.Motion} Motion
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Motion.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.Motion();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.uid = reader.uint32();
+                    break;
+                case 2:
+                    message.x = reader.float();
+                    break;
+                case 3:
+                    message.y = reader.float();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a Motion message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof protocol.Motion
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {protocol.Motion} Motion
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Motion.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a Motion message.
+         * @function verify
+         * @memberof protocol.Motion
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Motion.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (!$util.isInteger(message.uid))
+                    return "uid: integer expected";
+            if (message.x != null && message.hasOwnProperty("x"))
+                if (typeof message.x !== "number")
+                    return "x: number expected";
+            if (message.y != null && message.hasOwnProperty("y"))
+                if (typeof message.y !== "number")
+                    return "y: number expected";
+            return null;
+        };
+
+        /**
+         * Creates a Motion message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof protocol.Motion
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {protocol.Motion} Motion
+         */
+        Motion.fromObject = function fromObject(object) {
+            if (object instanceof $root.protocol.Motion)
+                return object;
+            var message = new $root.protocol.Motion();
+            if (object.uid != null)
+                message.uid = object.uid >>> 0;
+            if (object.x != null)
+                message.x = Number(object.x);
+            if (object.y != null)
+                message.y = Number(object.y);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a Motion message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof protocol.Motion
+         * @static
+         * @param {protocol.Motion} message Motion
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Motion.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.uid = 0;
+                object.x = 0;
+                object.y = 0;
+            }
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                object.uid = message.uid;
+            if (message.x != null && message.hasOwnProperty("x"))
+                object.x = options.json && !isFinite(message.x) ? String(message.x) : message.x;
+            if (message.y != null && message.hasOwnProperty("y"))
+                object.y = options.json && !isFinite(message.y) ? String(message.y) : message.y;
+            return object;
+        };
+
+        /**
+         * Converts this Motion to JSON.
+         * @function toJSON
+         * @memberof protocol.Motion
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Motion.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return Motion;
+    })();
+
     return protocol;
 })();
 

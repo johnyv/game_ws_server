@@ -4,7 +4,7 @@
 package logic.protocol;
 
 public interface PlayerOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:user.Player)
+    // @@protoc_insertion_point(interface_extends:protocol.Player)
     com.google.protobuf.MessageOrBuilder {
 
   /**

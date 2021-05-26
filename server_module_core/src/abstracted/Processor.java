@@ -14,9 +14,9 @@ public abstract class Processor {
         this.code = code;
     }
 
-    protected abstract void init(Session session, ProtoMsg packet) throws Exception;
+    protected abstract void init(Session session, ProtoMsg protoMsg) throws Exception;
 
-    public abstract void process(Session session, ProtoMsg packet) throws Exception;
+    public abstract void process(Session session, ProtoMsg protoMsg) throws Exception;
 
 //    void send(String msg);
 }

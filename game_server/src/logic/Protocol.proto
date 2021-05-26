@@ -1,5 +1,5 @@
 syntax ="proto3";
-package user;
+package protocol;
 
 option java_package="logic.protocol";
 option java_multiple_files=true;
@@ -16,5 +16,16 @@ message HeartBeat{
 	//服务器当前时间
 	int64 system_currtime = 1;
 }
+
+message Motion{
+    uint32 uid =1;
+    float x = 2;
+    float y = 3;
+}
+
+//protoc --js_out=import_style=commonjs,binary:./ Protocol.proto
+
+//pbjs -t static-module -w commonjs -o proto.js *.proto
+//pbts -o proto.d.ts proto.js
 
 //protoc --java_out=../ Protocol.proto

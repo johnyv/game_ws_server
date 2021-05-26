@@ -15,15 +15,20 @@ public final class Protocol {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_user_Player_descriptor;
+    internal_static_protocol_Player_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_user_Player_fieldAccessorTable;
+      internal_static_protocol_Player_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_user_HeartBeat_descriptor;
+    internal_static_protocol_HeartBeat_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_user_HeartBeat_fieldAccessorTable;
+      internal_static_protocol_HeartBeat_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_protocol_Motion_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_protocol_Motion_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -33,27 +38,35 @@ public final class Protocol {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016Protocol.proto\022\004user\"5\n\006Player\022\n\n\002id\030\001" +
-      " \001(\r\022\014\n\004name\030\002 \001(\t\022\021\n\tenterTime\030\003 \001(\004\"$\n" +
-      "\tHeartBeat\022\027\n\017system_currtime\030\001 \001(\003B\034\n\016l" +
-      "ogic.protocolB\010ProtocolP\001b\006proto3"
+      "\n\016Protocol.proto\022\010protocol\"5\n\006Player\022\n\n\002" +
+      "id\030\001 \001(\r\022\014\n\004name\030\002 \001(\t\022\021\n\tenterTime\030\003 \001(" +
+      "\004\"$\n\tHeartBeat\022\027\n\017system_currtime\030\001 \001(\003\"" +
+      "+\n\006Motion\022\013\n\003uid\030\001 \001(\r\022\t\n\001x\030\002 \001(\002\022\t\n\001y\030\003" +
+      " \001(\002B\034\n\016logic.protocolB\010ProtocolP\001b\006prot" +
+      "o3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_user_Player_descriptor =
+    internal_static_protocol_Player_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_user_Player_fieldAccessorTable = new
+    internal_static_protocol_Player_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_user_Player_descriptor,
+        internal_static_protocol_Player_descriptor,
         new java.lang.String[] { "Id", "Name", "EnterTime", });
-    internal_static_user_HeartBeat_descriptor =
+    internal_static_protocol_HeartBeat_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_user_HeartBeat_fieldAccessorTable = new
+    internal_static_protocol_HeartBeat_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_user_HeartBeat_descriptor,
+        internal_static_protocol_HeartBeat_descriptor,
         new java.lang.String[] { "SystemCurrtime", });
+    internal_static_protocol_Motion_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_protocol_Motion_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_protocol_Motion_descriptor,
+        new java.lang.String[] { "Uid", "X", "Y", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

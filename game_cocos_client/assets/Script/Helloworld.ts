@@ -3,10 +3,11 @@ const { ccclass, property } = cc._decorator;
 import { protocol } from "../proto/proto";
 import HeartBeat = protocol.HeartBeat;
 import Player = protocol.Player;
+import Motion = protocol.Motion;
 
 import { NET } from "./net/NetHandler";
 import { EVENTS } from "./util/EventHandler";
-import MsgPack from "./util/MsgPack";
+import ProtoMsg from "./util/ProtoMsg";
 
 @ccclass
 export default class Helloworld extends cc.Component {
@@ -37,7 +38,7 @@ export default class Helloworld extends cc.Component {
                 });
                 let uint8Arr = HeartBeat.encode(msg).finish();
 
-                let msgBuf = MsgPack.pack(1001, uint8Arr);
+                let msgBuf = ProtoMsg.pack(1001, uint8Arr);
                 NET.send(msgBuf);
             }
         }, 3);
@@ -51,8 +52,16 @@ export default class Helloworld extends cc.Component {
     }
 
     onTouchEnd(event: cc.Event.EventTouch) {
-        cc.log(event.getLocationX(), event.getLocationY());
-        var pt = new cc.Vec2(event.getLocationX() - 480, event.getLocationY() - 320);
+        var pt: cc.Vec2 = new cc.Vec2(event.getLocationX() - 480, event.getLocationY() - 320);
+        cc.log("move x:", pt.x);
+        cc.log("move y:", pt.y);
+
+        var msg = Motion.create({ x: pt.x, y: pt.y });
+        var uint8Arr = Motion.encode(msg).finish();
+
+        var msgBuf = ProtoMsg.pack(1003, uint8Arr);
+        NET.send(msgBuf);
+
         this.cocos.node.runAction(
             cc.moveTo(1, pt)
         );

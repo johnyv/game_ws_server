@@ -4,26 +4,25 @@
 package logic.protocol;
 
 /**
- * Protobuf type {@code protocol.Player}
+ * Protobuf type {@code protocol.Motion}
  */
-public final class Player extends
+public final class Motion extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:protocol.Player)
-    PlayerOrBuilder {
+    // @@protoc_insertion_point(message_implements:protocol.Motion)
+    MotionOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use Player.newBuilder() to construct.
-  private Player(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use Motion.newBuilder() to construct.
+  private Motion(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private Player() {
-    name_ = "";
+  private Motion() {
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new Player();
+    return new Motion();
   }
 
   @java.lang.Override
@@ -31,7 +30,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private Player(
+  private Motion(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -51,18 +50,17 @@ private static final long serialVersionUID = 0L;
             break;
           case 8: {
 
-            id_ = input.readUInt32();
+            uid_ = input.readUInt32();
             break;
           }
-          case 18: {
-            java.lang.String s = input.readStringRequireUtf8();
+          case 21: {
 
-            name_ = s;
+            x_ = input.readFloat();
             break;
           }
-          case 24: {
+          case 29: {
 
-            enterTime_ = input.readUInt64();
+            y_ = input.readFloat();
             break;
           }
           default: {
@@ -86,75 +84,48 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return logic.protocol.Protocol.internal_static_protocol_Player_descriptor;
+    return logic.protocol.Protocol.internal_static_protocol_Motion_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return logic.protocol.Protocol.internal_static_protocol_Player_fieldAccessorTable
+    return logic.protocol.Protocol.internal_static_protocol_Motion_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            logic.protocol.Player.class, logic.protocol.Player.Builder.class);
+            logic.protocol.Motion.class, logic.protocol.Motion.Builder.class);
   }
 
-  public static final int ID_FIELD_NUMBER = 1;
-  private int id_;
+  public static final int UID_FIELD_NUMBER = 1;
+  private int uid_;
   /**
-   * <code>uint32 id = 1;</code>
-   * @return The id.
+   * <code>uint32 uid = 1;</code>
+   * @return The uid.
    */
   @java.lang.Override
-  public int getId() {
-    return id_;
+  public int getUid() {
+    return uid_;
   }
 
-  public static final int NAME_FIELD_NUMBER = 2;
-  private volatile java.lang.Object name_;
+  public static final int X_FIELD_NUMBER = 2;
+  private float x_;
   /**
-   * <code>string name = 2;</code>
-   * @return The name.
+   * <code>float x = 2;</code>
+   * @return The x.
    */
   @java.lang.Override
-  public java.lang.String getName() {
-    java.lang.Object ref = name_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      name_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string name = 2;</code>
-   * @return The bytes for name.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getNameBytes() {
-    java.lang.Object ref = name_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      name_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public float getX() {
+    return x_;
   }
 
-  public static final int ENTERTIME_FIELD_NUMBER = 3;
-  private long enterTime_;
+  public static final int Y_FIELD_NUMBER = 3;
+  private float y_;
   /**
-   * <code>uint64 enterTime = 3;</code>
-   * @return The enterTime.
+   * <code>float y = 3;</code>
+   * @return The y.
    */
   @java.lang.Override
-  public long getEnterTime() {
-    return enterTime_;
+  public float getY() {
+    return y_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -171,14 +142,14 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (id_ != 0) {
-      output.writeUInt32(1, id_);
+    if (uid_ != 0) {
+      output.writeUInt32(1, uid_);
     }
-    if (!getNameBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
+    if (x_ != 0F) {
+      output.writeFloat(2, x_);
     }
-    if (enterTime_ != 0L) {
-      output.writeUInt64(3, enterTime_);
+    if (y_ != 0F) {
+      output.writeFloat(3, y_);
     }
     unknownFields.writeTo(output);
   }
@@ -189,16 +160,17 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (id_ != 0) {
+    if (uid_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeUInt32Size(1, id_);
+        .computeUInt32Size(1, uid_);
     }
-    if (!getNameBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
-    }
-    if (enterTime_ != 0L) {
+    if (x_ != 0F) {
       size += com.google.protobuf.CodedOutputStream
-        .computeUInt64Size(3, enterTime_);
+        .computeFloatSize(2, x_);
+    }
+    if (y_ != 0F) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeFloatSize(3, y_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -210,17 +182,19 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof logic.protocol.Player)) {
+    if (!(obj instanceof logic.protocol.Motion)) {
       return super.equals(obj);
     }
-    logic.protocol.Player other = (logic.protocol.Player) obj;
+    logic.protocol.Motion other = (logic.protocol.Motion) obj;
 
-    if (getId()
-        != other.getId()) return false;
-    if (!getName()
-        .equals(other.getName())) return false;
-    if (getEnterTime()
-        != other.getEnterTime()) return false;
+    if (getUid()
+        != other.getUid()) return false;
+    if (java.lang.Float.floatToIntBits(getX())
+        != java.lang.Float.floatToIntBits(
+            other.getX())) return false;
+    if (java.lang.Float.floatToIntBits(getY())
+        != java.lang.Float.floatToIntBits(
+            other.getY())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -232,81 +206,82 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + ID_FIELD_NUMBER;
-    hash = (53 * hash) + getId();
-    hash = (37 * hash) + NAME_FIELD_NUMBER;
-    hash = (53 * hash) + getName().hashCode();
-    hash = (37 * hash) + ENTERTIME_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        getEnterTime());
+    hash = (37 * hash) + UID_FIELD_NUMBER;
+    hash = (53 * hash) + getUid();
+    hash = (37 * hash) + X_FIELD_NUMBER;
+    hash = (53 * hash) + java.lang.Float.floatToIntBits(
+        getX());
+    hash = (37 * hash) + Y_FIELD_NUMBER;
+    hash = (53 * hash) + java.lang.Float.floatToIntBits(
+        getY());
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static logic.protocol.Player parseFrom(
+  public static logic.protocol.Motion parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static logic.protocol.Player parseFrom(
+  public static logic.protocol.Motion parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static logic.protocol.Player parseFrom(
+  public static logic.protocol.Motion parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static logic.protocol.Player parseFrom(
+  public static logic.protocol.Motion parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static logic.protocol.Player parseFrom(byte[] data)
+  public static logic.protocol.Motion parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static logic.protocol.Player parseFrom(
+  public static logic.protocol.Motion parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static logic.protocol.Player parseFrom(java.io.InputStream input)
+  public static logic.protocol.Motion parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static logic.protocol.Player parseFrom(
+  public static logic.protocol.Motion parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static logic.protocol.Player parseDelimitedFrom(java.io.InputStream input)
+  public static logic.protocol.Motion parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static logic.protocol.Player parseDelimitedFrom(
+  public static logic.protocol.Motion parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static logic.protocol.Player parseFrom(
+  public static logic.protocol.Motion parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static logic.protocol.Player parseFrom(
+  public static logic.protocol.Motion parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -319,7 +294,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(logic.protocol.Player prototype) {
+  public static Builder newBuilder(logic.protocol.Motion prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -335,26 +310,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code protocol.Player}
+   * Protobuf type {@code protocol.Motion}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:protocol.Player)
-      logic.protocol.PlayerOrBuilder {
+      // @@protoc_insertion_point(builder_implements:protocol.Motion)
+      logic.protocol.MotionOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return logic.protocol.Protocol.internal_static_protocol_Player_descriptor;
+      return logic.protocol.Protocol.internal_static_protocol_Motion_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return logic.protocol.Protocol.internal_static_protocol_Player_fieldAccessorTable
+      return logic.protocol.Protocol.internal_static_protocol_Motion_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              logic.protocol.Player.class, logic.protocol.Player.Builder.class);
+              logic.protocol.Motion.class, logic.protocol.Motion.Builder.class);
     }
 
-    // Construct using logic.protocol.Player.newBuilder()
+    // Construct using logic.protocol.Motion.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -372,11 +347,11 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      id_ = 0;
+      uid_ = 0;
 
-      name_ = "";
+      x_ = 0F;
 
-      enterTime_ = 0L;
+      y_ = 0F;
 
       return this;
     }
@@ -384,17 +359,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return logic.protocol.Protocol.internal_static_protocol_Player_descriptor;
+      return logic.protocol.Protocol.internal_static_protocol_Motion_descriptor;
     }
 
     @java.lang.Override
-    public logic.protocol.Player getDefaultInstanceForType() {
-      return logic.protocol.Player.getDefaultInstance();
+    public logic.protocol.Motion getDefaultInstanceForType() {
+      return logic.protocol.Motion.getDefaultInstance();
     }
 
     @java.lang.Override
-    public logic.protocol.Player build() {
-      logic.protocol.Player result = buildPartial();
+    public logic.protocol.Motion build() {
+      logic.protocol.Motion result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -402,11 +377,11 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public logic.protocol.Player buildPartial() {
-      logic.protocol.Player result = new logic.protocol.Player(this);
-      result.id_ = id_;
-      result.name_ = name_;
-      result.enterTime_ = enterTime_;
+    public logic.protocol.Motion buildPartial() {
+      logic.protocol.Motion result = new logic.protocol.Motion(this);
+      result.uid_ = uid_;
+      result.x_ = x_;
+      result.y_ = y_;
       onBuilt();
       return result;
     }
@@ -445,25 +420,24 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof logic.protocol.Player) {
-        return mergeFrom((logic.protocol.Player)other);
+      if (other instanceof logic.protocol.Motion) {
+        return mergeFrom((logic.protocol.Motion)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(logic.protocol.Player other) {
-      if (other == logic.protocol.Player.getDefaultInstance()) return this;
-      if (other.getId() != 0) {
-        setId(other.getId());
+    public Builder mergeFrom(logic.protocol.Motion other) {
+      if (other == logic.protocol.Motion.getDefaultInstance()) return this;
+      if (other.getUid() != 0) {
+        setUid(other.getUid());
       }
-      if (!other.getName().isEmpty()) {
-        name_ = other.name_;
-        onChanged();
+      if (other.getX() != 0F) {
+        setX(other.getX());
       }
-      if (other.getEnterTime() != 0L) {
-        setEnterTime(other.getEnterTime());
+      if (other.getY() != 0F) {
+        setY(other.getY());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -480,11 +454,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      logic.protocol.Player parsedMessage = null;
+      logic.protocol.Motion parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (logic.protocol.Player) e.getUnfinishedMessage();
+        parsedMessage = (logic.protocol.Motion) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -494,140 +468,95 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private int id_ ;
+    private int uid_ ;
     /**
-     * <code>uint32 id = 1;</code>
-     * @return The id.
+     * <code>uint32 uid = 1;</code>
+     * @return The uid.
      */
     @java.lang.Override
-    public int getId() {
-      return id_;
+    public int getUid() {
+      return uid_;
     }
     /**
-     * <code>uint32 id = 1;</code>
-     * @param value The id to set.
+     * <code>uint32 uid = 1;</code>
+     * @param value The uid to set.
      * @return This builder for chaining.
      */
-    public Builder setId(int value) {
+    public Builder setUid(int value) {
       
-      id_ = value;
+      uid_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>uint32 id = 1;</code>
+     * <code>uint32 uid = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearId() {
+    public Builder clearUid() {
       
-      id_ = 0;
+      uid_ = 0;
       onChanged();
       return this;
     }
 
-    private java.lang.Object name_ = "";
+    private float x_ ;
     /**
-     * <code>string name = 2;</code>
-     * @return The name.
+     * <code>float x = 2;</code>
+     * @return The x.
      */
-    public java.lang.String getName() {
-      java.lang.Object ref = name_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        name_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
+    @java.lang.Override
+    public float getX() {
+      return x_;
     }
     /**
-     * <code>string name = 2;</code>
-     * @return The bytes for name.
-     */
-    public com.google.protobuf.ByteString
-        getNameBytes() {
-      java.lang.Object ref = name_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        name_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string name = 2;</code>
-     * @param value The name to set.
+     * <code>float x = 2;</code>
+     * @param value The x to set.
      * @return This builder for chaining.
      */
-    public Builder setName(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      name_ = value;
+    public Builder setX(float value) {
+      
+      x_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string name = 2;</code>
+     * <code>float x = 2;</code>
      * @return This builder for chaining.
      */
-    public Builder clearName() {
+    public Builder clearX() {
       
-      name_ = getDefaultInstance().getName();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string name = 2;</code>
-     * @param value The bytes for name to set.
-     * @return This builder for chaining.
-     */
-    public Builder setNameBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      name_ = value;
+      x_ = 0F;
       onChanged();
       return this;
     }
 
-    private long enterTime_ ;
+    private float y_ ;
     /**
-     * <code>uint64 enterTime = 3;</code>
-     * @return The enterTime.
+     * <code>float y = 3;</code>
+     * @return The y.
      */
     @java.lang.Override
-    public long getEnterTime() {
-      return enterTime_;
+    public float getY() {
+      return y_;
     }
     /**
-     * <code>uint64 enterTime = 3;</code>
-     * @param value The enterTime to set.
+     * <code>float y = 3;</code>
+     * @param value The y to set.
      * @return This builder for chaining.
      */
-    public Builder setEnterTime(long value) {
+    public Builder setY(float value) {
       
-      enterTime_ = value;
+      y_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>uint64 enterTime = 3;</code>
+     * <code>float y = 3;</code>
      * @return This builder for chaining.
      */
-    public Builder clearEnterTime() {
+    public Builder clearY() {
       
-      enterTime_ = 0L;
+      y_ = 0F;
       onChanged();
       return this;
     }
@@ -644,41 +573,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:protocol.Player)
+    // @@protoc_insertion_point(builder_scope:protocol.Motion)
   }
 
-  // @@protoc_insertion_point(class_scope:protocol.Player)
-  private static final logic.protocol.Player DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:protocol.Motion)
+  private static final logic.protocol.Motion DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new logic.protocol.Player();
+    DEFAULT_INSTANCE = new logic.protocol.Motion();
   }
 
-  public static logic.protocol.Player getDefaultInstance() {
+  public static logic.protocol.Motion getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<Player>
-      PARSER = new com.google.protobuf.AbstractParser<Player>() {
+  private static final com.google.protobuf.Parser<Motion>
+      PARSER = new com.google.protobuf.AbstractParser<Motion>() {
     @java.lang.Override
-    public Player parsePartialFrom(
+    public Motion parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new Player(input, extensionRegistry);
+      return new Motion(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<Player> parser() {
+  public static com.google.protobuf.Parser<Motion> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<Player> getParserForType() {
+  public com.google.protobuf.Parser<Motion> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public logic.protocol.Player getDefaultInstanceForType() {
+  public logic.protocol.Motion getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

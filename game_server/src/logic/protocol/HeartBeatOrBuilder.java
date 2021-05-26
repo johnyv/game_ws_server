@@ -4,7 +4,7 @@
 package logic.protocol;
 
 public interface HeartBeatOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:user.HeartBeat)
+    // @@protoc_insertion_point(interface_extends:protocol.HeartBeat)
     com.google.protobuf.MessageOrBuilder {
 
   /**

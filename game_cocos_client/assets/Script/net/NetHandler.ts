@@ -1,5 +1,5 @@
 import { EVENTS } from "../util/EventHandler";
-import MsgPack from "../util/MsgPack";
+import ProtoMsg from "../util/ProtoMsg";
 
 class NetHandler {
     private static instance: NetHandler;
@@ -61,7 +61,7 @@ class NetHandler {
     private process(event: MessageEvent): void {
         var arrBuf = event.data;
 
-        var msg = MsgPack.unpack(arrBuf);
+        var msg = ProtoMsg.unpack(arrBuf);
         EVENTS.emit(msg.code, msg.dataBytes);
     }
 }

@@ -20,28 +20,22 @@ public class PlayerProcessor extends Processor {
     }
 
     @Override
-    protected void init(Session session, ProtoMsg packet) {
+    protected void init(Session session, ProtoMsg protoMsg) {
         try {
-            player = Player.parseFrom(packet.getData());
+            player = Player.parseFrom(protoMsg.getData());
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void process(Session session, ProtoMsg packet) throws Exception {
-        logger.info("process player...");
-        init(session, packet);
+    public void process(Session session, ProtoMsg protoMsg) throws Exception {
+        init(session, protoMsg);
 
-        logger.info("length:" + packet.getLength());
-        logger.info("code:" + packet.getCode());
-
-        logger.info("id:" + player.getId());
         String name = player.getName();
         logger.info("name:" + name);
-        logger.info("time:" + player.getEnterTime());
 
-        byte[] bytes = ProtoMsg.pack(packet.getCode(), player);
+        byte[] bytes = ProtoMsg.pack(protoMsg.getCode(), player);
         session.write(bytes);
     }
 

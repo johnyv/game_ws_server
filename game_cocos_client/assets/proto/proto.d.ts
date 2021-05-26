@@ -193,4 +193,106 @@ export namespace protocol {
          */
         public toJSON(): { [k: string]: any };
     }
+
+    /** Properties of a Motion. */
+    interface IMotion {
+
+        /** Motion uid */
+        uid?: (number|null);
+
+        /** Motion x */
+        x?: (number|null);
+
+        /** Motion y */
+        y?: (number|null);
+    }
+
+    /** Represents a Motion. */
+    class Motion implements IMotion {
+
+        /**
+         * Constructs a new Motion.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: protocol.IMotion);
+
+        /** Motion uid. */
+        public uid: number;
+
+        /** Motion x. */
+        public x: number;
+
+        /** Motion y. */
+        public y: number;
+
+        /**
+         * Creates a new Motion instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns Motion instance
+         */
+        public static create(properties?: protocol.IMotion): protocol.Motion;
+
+        /**
+         * Encodes the specified Motion message. Does not implicitly {@link protocol.Motion.verify|verify} messages.
+         * @param message Motion message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: protocol.IMotion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified Motion message, length delimited. Does not implicitly {@link protocol.Motion.verify|verify} messages.
+         * @param message Motion message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: protocol.IMotion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a Motion message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns Motion
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protocol.Motion;
+
+        /**
+         * Decodes a Motion message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns Motion
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protocol.Motion;
+
+        /**
+         * Verifies a Motion message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a Motion message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns Motion
+         */
+        public static fromObject(object: { [k: string]: any }): protocol.Motion;
+
+        /**
+         * Creates a plain object from a Motion message. Also converts values to other types if specified.
+         * @param message Motion
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: protocol.Motion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this Motion to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
 }

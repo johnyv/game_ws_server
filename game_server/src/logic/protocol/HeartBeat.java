@@ -8,11 +8,11 @@ package logic.protocol;
  * 心跳测试
  * </pre>
  *
- * Protobuf type {@code user.HeartBeat}
+ * Protobuf type {@code protocol.HeartBeat}
  */
 public final class HeartBeat extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:user.HeartBeat)
+    // @@protoc_insertion_point(message_implements:protocol.HeartBeat)
     HeartBeatOrBuilder {
 private static final long serialVersionUID = 0L;
   // Use HeartBeat.newBuilder() to construct.
@@ -78,13 +78,13 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return logic.protocol.Protocol.internal_static_user_HeartBeat_descriptor;
+    return logic.protocol.Protocol.internal_static_protocol_HeartBeat_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return logic.protocol.Protocol.internal_static_user_HeartBeat_fieldAccessorTable
+    return logic.protocol.Protocol.internal_static_protocol_HeartBeat_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             logic.protocol.HeartBeat.class, logic.protocol.HeartBeat.Builder.class);
   }
@@ -265,21 +265,21 @@ private static final long serialVersionUID = 0L;
    * 心跳测试
    * </pre>
    *
-   * Protobuf type {@code user.HeartBeat}
+   * Protobuf type {@code protocol.HeartBeat}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:user.HeartBeat)
+      // @@protoc_insertion_point(builder_implements:protocol.HeartBeat)
       logic.protocol.HeartBeatOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return logic.protocol.Protocol.internal_static_user_HeartBeat_descriptor;
+      return logic.protocol.Protocol.internal_static_protocol_HeartBeat_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return logic.protocol.Protocol.internal_static_user_HeartBeat_fieldAccessorTable
+      return logic.protocol.Protocol.internal_static_protocol_HeartBeat_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               logic.protocol.HeartBeat.class, logic.protocol.HeartBeat.Builder.class);
     }
@@ -310,7 +310,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return logic.protocol.Protocol.internal_static_user_HeartBeat_descriptor;
+      return logic.protocol.Protocol.internal_static_protocol_HeartBeat_descriptor;
     }
 
     @java.lang.Override
@@ -466,10 +466,10 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:user.HeartBeat)
+    // @@protoc_insertion_point(builder_scope:protocol.HeartBeat)
   }
 
-  // @@protoc_insertion_point(class_scope:user.HeartBeat)
+  // @@protoc_insertion_point(class_scope:protocol.HeartBeat)
   private static final logic.protocol.HeartBeat DEFAULT_INSTANCE;
   static {
     DEFAULT_INSTANCE = new logic.protocol.HeartBeat();

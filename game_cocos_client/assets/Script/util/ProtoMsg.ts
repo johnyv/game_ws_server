@@ -1,4 +1,4 @@
-export default class MsgPack{
+export default class ProtoMsg{
     public code:number;
     public length:number;
     public dataBytes:Uint8Array;
@@ -16,7 +16,7 @@ export default class MsgPack{
         return databuf;
     }
 
-    public static unpack(arrBuf:ArrayBuffer):MsgPack{
+    public static unpack(arrBuf:ArrayBuffer):ProtoMsg{
         var lengthBytes = new DataView(arrBuf.slice(0,4));
         var length = lengthBytes.getInt32(0);
 
@@ -25,9 +25,9 @@ export default class MsgPack{
 
         var buf = arrBuf.slice(8);
 
-        var msgPack = new MsgPack();
+        var msgPack = new ProtoMsg();
         msgPack.length = length;
-        msgPack.code = code
+        msgPack.code = code;
         msgPack.dataBytes = new Uint8Array(buf);
         return msgPack;
     }
