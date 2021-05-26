@@ -12,7 +12,7 @@ import io.netty.handler.codec.http.websocketx.*;
 import io.netty.util.CharsetUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import packet.MsgPack;
+import packet.ProtoMsg;
 import session.Session;
 
 public class WebSocketHandler extends ChannelInboundHandlerAdapter {
@@ -112,7 +112,7 @@ public class WebSocketHandler extends ChannelInboundHandlerAdapter {
             bFrame.content().readBytes(bytes);
 
             try {
-                MsgPack pack = MsgPack.unPack(bytes);
+                ProtoMsg pack = ProtoMsg.unPack(bytes);
                 Session session = new Session(ctx);
                 Dispatcher.getInstance().dispatch(session, pack);
             } catch (Exception e) {

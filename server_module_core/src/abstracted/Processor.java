@@ -1,7 +1,7 @@
 package abstracted;
 
 import session.Session;
-import packet.MsgPack;
+import packet.ProtoMsg;
 
 public abstract class Processor {
     protected int code = 0;
@@ -14,9 +14,9 @@ public abstract class Processor {
         this.code = code;
     }
 
-    protected abstract void init(Session session, MsgPack packet) throws Exception;
+    protected abstract void init(Session session, ProtoMsg packet) throws Exception;
 
-    public abstract void process(Session session, MsgPack packet) throws Exception;
+    public abstract void process(Session session, ProtoMsg packet) throws Exception;
 
 //    void send(String msg);
 }

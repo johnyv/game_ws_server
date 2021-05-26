@@ -4,7 +4,7 @@ import session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import abstracted.Processor;
-import packet.MsgPack;
+import packet.ProtoMsg;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +33,7 @@ public class Dispatcher {
         return proc;
     }
 
-    public void dispatch(final Session info, final MsgPack packet) {
+    public void dispatch(final Session info, final ProtoMsg packet) {
         int code = packet.getCode();
         final Processor proc = get(code);
         if (proc == null) {
@@ -49,7 +49,7 @@ public class Dispatcher {
         info.addQuest(exec);
     }
 
-    private void process(final Processor proc, final Session info, final MsgPack packet) {
+    private void process(final Processor proc, final Session info, final ProtoMsg packet) {
         try {
             proc.process(info, packet);
         } catch (Exception e) {

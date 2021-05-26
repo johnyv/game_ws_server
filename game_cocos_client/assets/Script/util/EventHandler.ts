@@ -22,8 +22,8 @@ export default class EventHandler {
                 // for (var n = 1; n < arguments.length; ++n) {
                 //     args.push(arguments[n]);
                 // }
-                // cc.log("call fun===>", handler);
-                // cc.log("args===>", data);
+
+                // handler.apply(this, args);
                 handler.apply(this, [data]);
             }
         }

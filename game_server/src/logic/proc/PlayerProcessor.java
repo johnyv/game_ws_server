@@ -6,7 +6,7 @@ import logic.protocol.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import abstracted.Processor;
-import packet.MsgPack;
+import packet.ProtoMsg;
 import session.Session;
 
 public class PlayerProcessor extends Processor {
@@ -20,7 +20,7 @@ public class PlayerProcessor extends Processor {
     }
 
     @Override
-    protected void init(Session session, MsgPack packet) {
+    protected void init(Session session, ProtoMsg packet) {
         try {
             player = Player.parseFrom(packet.getData());
         } catch (InvalidProtocolBufferException e) {
@@ -29,7 +29,7 @@ public class PlayerProcessor extends Processor {
     }
 
     @Override
-    public void process(Session session, MsgPack packet) throws Exception {
+    public void process(Session session, ProtoMsg packet) throws Exception {
         logger.info("process player...");
         init(session, packet);
 
@@ -41,7 +41,7 @@ public class PlayerProcessor extends Processor {
         logger.info("name:" + name);
         logger.info("time:" + player.getEnterTime());
 
-        byte[] bytes = MsgPack.pack(packet.getCode(), player);
+        byte[] bytes = ProtoMsg.pack(packet.getCode(), player);
         session.write(bytes);
     }
 

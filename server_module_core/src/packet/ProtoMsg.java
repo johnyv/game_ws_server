@@ -3,12 +3,12 @@ package packet;
 import com.google.protobuf.MessageLite;
 import utils.ByteUtil;
 
-public class MsgPack {
+public class ProtoMsg {
     private int length;
     private int code;
     private byte[] data;
 
-    public MsgPack() {
+    public ProtoMsg() {
     }
 
     public void setLength(int length) {
@@ -35,8 +35,8 @@ public class MsgPack {
         return data;
     }
 
-    public static MsgPack unPack(byte[] bytes) {
-        MsgPack pack = new MsgPack();
+    public static ProtoMsg unPack(byte[] bytes) {
+        ProtoMsg pack = new ProtoMsg();
 
         int i, index = 0;
         byte[] lengthBytes = new byte[4];
