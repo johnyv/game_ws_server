@@ -264,24 +264,26 @@ $root.protocol = (function() {
         return Player;
     })();
 
-    protocol.HeartBeat = (function() {
+    protocol.LoginInfo = (function() {
 
         /**
-         * Properties of a HeartBeat.
+         * Properties of a LoginInfo.
          * @memberof protocol
-         * @interface IHeartBeat
-         * @property {number|Long|null} [systemCurrtime] HeartBeat systemCurrtime
+         * @interface ILoginInfo
+         * @property {string|null} [id] LoginInfo id
+         * @property {string|null} [pwd] LoginInfo pwd
+         * @property {number|Long|null} [enterTime] LoginInfo enterTime
          */
 
         /**
-         * Constructs a new HeartBeat.
+         * Constructs a new LoginInfo.
          * @memberof protocol
-         * @classdesc Represents a HeartBeat.
-         * @implements IHeartBeat
+         * @classdesc Represents a LoginInfo.
+         * @implements ILoginInfo
          * @constructor
-         * @param {protocol.IHeartBeat=} [properties] Properties to set
+         * @param {protocol.ILoginInfo=} [properties] Properties to set
          */
-        function HeartBeat(properties) {
+        function LoginInfo(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -289,35 +291,279 @@ $root.protocol = (function() {
         }
 
         /**
-         * HeartBeat systemCurrtime.
-         * @member {number|Long} systemCurrtime
-         * @memberof protocol.HeartBeat
+         * LoginInfo id.
+         * @member {string} id
+         * @memberof protocol.LoginInfo
          * @instance
          */
-        HeartBeat.prototype.systemCurrtime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        LoginInfo.prototype.id = "";
 
         /**
-         * Creates a new HeartBeat instance using the specified properties.
-         * @function create
-         * @memberof protocol.HeartBeat
-         * @static
-         * @param {protocol.IHeartBeat=} [properties] Properties to set
-         * @returns {protocol.HeartBeat} HeartBeat instance
+         * LoginInfo pwd.
+         * @member {string} pwd
+         * @memberof protocol.LoginInfo
+         * @instance
          */
-        HeartBeat.create = function create(properties) {
-            return new HeartBeat(properties);
+        LoginInfo.prototype.pwd = "";
+
+        /**
+         * LoginInfo enterTime.
+         * @member {number|Long} enterTime
+         * @memberof protocol.LoginInfo
+         * @instance
+         */
+        LoginInfo.prototype.enterTime = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+
+        /**
+         * Creates a new LoginInfo instance using the specified properties.
+         * @function create
+         * @memberof protocol.LoginInfo
+         * @static
+         * @param {protocol.ILoginInfo=} [properties] Properties to set
+         * @returns {protocol.LoginInfo} LoginInfo instance
+         */
+        LoginInfo.create = function create(properties) {
+            return new LoginInfo(properties);
         };
 
         /**
-         * Encodes the specified HeartBeat message. Does not implicitly {@link protocol.HeartBeat.verify|verify} messages.
+         * Encodes the specified LoginInfo message. Does not implicitly {@link protocol.LoginInfo.verify|verify} messages.
          * @function encode
-         * @memberof protocol.HeartBeat
+         * @memberof protocol.LoginInfo
          * @static
-         * @param {protocol.IHeartBeat} message HeartBeat message or plain object to encode
+         * @param {protocol.ILoginInfo} message LoginInfo message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        HeartBeat.encode = function encode(message, writer) {
+        LoginInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+            if (message.pwd != null && Object.hasOwnProperty.call(message, "pwd"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.pwd);
+            if (message.enterTime != null && Object.hasOwnProperty.call(message, "enterTime"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.enterTime);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified LoginInfo message, length delimited. Does not implicitly {@link protocol.LoginInfo.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof protocol.LoginInfo
+         * @static
+         * @param {protocol.ILoginInfo} message LoginInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        LoginInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a LoginInfo message from the specified reader or buffer.
+         * @function decode
+         * @memberof protocol.LoginInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {protocol.LoginInfo} LoginInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        LoginInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.LoginInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.id = reader.string();
+                    break;
+                case 2:
+                    message.pwd = reader.string();
+                    break;
+                case 3:
+                    message.enterTime = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a LoginInfo message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof protocol.LoginInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {protocol.LoginInfo} LoginInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        LoginInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a LoginInfo message.
+         * @function verify
+         * @memberof protocol.LoginInfo
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        LoginInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isString(message.id))
+                    return "id: string expected";
+            if (message.pwd != null && message.hasOwnProperty("pwd"))
+                if (!$util.isString(message.pwd))
+                    return "pwd: string expected";
+            if (message.enterTime != null && message.hasOwnProperty("enterTime"))
+                if (!$util.isInteger(message.enterTime) && !(message.enterTime && $util.isInteger(message.enterTime.low) && $util.isInteger(message.enterTime.high)))
+                    return "enterTime: integer|Long expected";
+            return null;
+        };
+
+        /**
+         * Creates a LoginInfo message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof protocol.LoginInfo
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {protocol.LoginInfo} LoginInfo
+         */
+        LoginInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.protocol.LoginInfo)
+                return object;
+            var message = new $root.protocol.LoginInfo();
+            if (object.id != null)
+                message.id = String(object.id);
+            if (object.pwd != null)
+                message.pwd = String(object.pwd);
+            if (object.enterTime != null)
+                if ($util.Long)
+                    (message.enterTime = $util.Long.fromValue(object.enterTime)).unsigned = true;
+                else if (typeof object.enterTime === "string")
+                    message.enterTime = parseInt(object.enterTime, 10);
+                else if (typeof object.enterTime === "number")
+                    message.enterTime = object.enterTime;
+                else if (typeof object.enterTime === "object")
+                    message.enterTime = new $util.LongBits(object.enterTime.low >>> 0, object.enterTime.high >>> 0).toNumber(true);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a LoginInfo message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof protocol.LoginInfo
+         * @static
+         * @param {protocol.LoginInfo} message LoginInfo
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        LoginInfo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = "";
+                object.pwd = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.enterTime = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.enterTime = options.longs === String ? "0" : 0;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.pwd != null && message.hasOwnProperty("pwd"))
+                object.pwd = message.pwd;
+            if (message.enterTime != null && message.hasOwnProperty("enterTime"))
+                if (typeof message.enterTime === "number")
+                    object.enterTime = options.longs === String ? String(message.enterTime) : message.enterTime;
+                else
+                    object.enterTime = options.longs === String ? $util.Long.prototype.toString.call(message.enterTime) : options.longs === Number ? new $util.LongBits(message.enterTime.low >>> 0, message.enterTime.high >>> 0).toNumber(true) : message.enterTime;
+            return object;
+        };
+
+        /**
+         * Converts this LoginInfo to JSON.
+         * @function toJSON
+         * @memberof protocol.LoginInfo
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        LoginInfo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return LoginInfo;
+    })();
+
+    protocol.HBInfo = (function() {
+
+        /**
+         * Properties of a HBInfo.
+         * @memberof protocol
+         * @interface IHBInfo
+         * @property {number|Long|null} [systemCurrtime] HBInfo systemCurrtime
+         */
+
+        /**
+         * Constructs a new HBInfo.
+         * @memberof protocol
+         * @classdesc Represents a HBInfo.
+         * @implements IHBInfo
+         * @constructor
+         * @param {protocol.IHBInfo=} [properties] Properties to set
+         */
+        function HBInfo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * HBInfo systemCurrtime.
+         * @member {number|Long} systemCurrtime
+         * @memberof protocol.HBInfo
+         * @instance
+         */
+        HBInfo.prototype.systemCurrtime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * Creates a new HBInfo instance using the specified properties.
+         * @function create
+         * @memberof protocol.HBInfo
+         * @static
+         * @param {protocol.IHBInfo=} [properties] Properties to set
+         * @returns {protocol.HBInfo} HBInfo instance
+         */
+        HBInfo.create = function create(properties) {
+            return new HBInfo(properties);
+        };
+
+        /**
+         * Encodes the specified HBInfo message. Does not implicitly {@link protocol.HBInfo.verify|verify} messages.
+         * @function encode
+         * @memberof protocol.HBInfo
+         * @static
+         * @param {protocol.IHBInfo} message HBInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        HBInfo.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.systemCurrtime != null && Object.hasOwnProperty.call(message, "systemCurrtime"))
@@ -326,33 +572,33 @@ $root.protocol = (function() {
         };
 
         /**
-         * Encodes the specified HeartBeat message, length delimited. Does not implicitly {@link protocol.HeartBeat.verify|verify} messages.
+         * Encodes the specified HBInfo message, length delimited. Does not implicitly {@link protocol.HBInfo.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof protocol.HeartBeat
+         * @memberof protocol.HBInfo
          * @static
-         * @param {protocol.IHeartBeat} message HeartBeat message or plain object to encode
+         * @param {protocol.IHBInfo} message HBInfo message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        HeartBeat.encodeDelimited = function encodeDelimited(message, writer) {
+        HBInfo.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a HeartBeat message from the specified reader or buffer.
+         * Decodes a HBInfo message from the specified reader or buffer.
          * @function decode
-         * @memberof protocol.HeartBeat
+         * @memberof protocol.HBInfo
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {protocol.HeartBeat} HeartBeat
+         * @returns {protocol.HBInfo} HBInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        HeartBeat.decode = function decode(reader, length) {
+        HBInfo.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.HeartBeat();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.HBInfo();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -368,30 +614,30 @@ $root.protocol = (function() {
         };
 
         /**
-         * Decodes a HeartBeat message from the specified reader or buffer, length delimited.
+         * Decodes a HBInfo message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof protocol.HeartBeat
+         * @memberof protocol.HBInfo
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {protocol.HeartBeat} HeartBeat
+         * @returns {protocol.HBInfo} HBInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        HeartBeat.decodeDelimited = function decodeDelimited(reader) {
+        HBInfo.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a HeartBeat message.
+         * Verifies a HBInfo message.
          * @function verify
-         * @memberof protocol.HeartBeat
+         * @memberof protocol.HBInfo
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        HeartBeat.verify = function verify(message) {
+        HBInfo.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.systemCurrtime != null && message.hasOwnProperty("systemCurrtime"))
@@ -401,17 +647,17 @@ $root.protocol = (function() {
         };
 
         /**
-         * Creates a HeartBeat message from a plain object. Also converts values to their respective internal types.
+         * Creates a HBInfo message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof protocol.HeartBeat
+         * @memberof protocol.HBInfo
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {protocol.HeartBeat} HeartBeat
+         * @returns {protocol.HBInfo} HBInfo
          */
-        HeartBeat.fromObject = function fromObject(object) {
-            if (object instanceof $root.protocol.HeartBeat)
+        HBInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.protocol.HBInfo)
                 return object;
-            var message = new $root.protocol.HeartBeat();
+            var message = new $root.protocol.HBInfo();
             if (object.systemCurrtime != null)
                 if ($util.Long)
                     (message.systemCurrtime = $util.Long.fromValue(object.systemCurrtime)).unsigned = false;
@@ -425,15 +671,15 @@ $root.protocol = (function() {
         };
 
         /**
-         * Creates a plain object from a HeartBeat message. Also converts values to other types if specified.
+         * Creates a plain object from a HBInfo message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof protocol.HeartBeat
+         * @memberof protocol.HBInfo
          * @static
-         * @param {protocol.HeartBeat} message HeartBeat
+         * @param {protocol.HBInfo} message HBInfo
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        HeartBeat.toObject = function toObject(message, options) {
+        HBInfo.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -452,39 +698,39 @@ $root.protocol = (function() {
         };
 
         /**
-         * Converts this HeartBeat to JSON.
+         * Converts this HBInfo to JSON.
          * @function toJSON
-         * @memberof protocol.HeartBeat
+         * @memberof protocol.HBInfo
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        HeartBeat.prototype.toJSON = function toJSON() {
+        HBInfo.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return HeartBeat;
+        return HBInfo;
     })();
 
-    protocol.Motion = (function() {
+    protocol.MotionInfo = (function() {
 
         /**
-         * Properties of a Motion.
+         * Properties of a MotionInfo.
          * @memberof protocol
-         * @interface IMotion
-         * @property {number|null} [uid] Motion uid
-         * @property {number|null} [x] Motion x
-         * @property {number|null} [y] Motion y
+         * @interface IMotionInfo
+         * @property {number|null} [uid] MotionInfo uid
+         * @property {number|null} [x] MotionInfo x
+         * @property {number|null} [y] MotionInfo y
          */
 
         /**
-         * Constructs a new Motion.
+         * Constructs a new MotionInfo.
          * @memberof protocol
-         * @classdesc Represents a Motion.
-         * @implements IMotion
+         * @classdesc Represents a MotionInfo.
+         * @implements IMotionInfo
          * @constructor
-         * @param {protocol.IMotion=} [properties] Properties to set
+         * @param {protocol.IMotionInfo=} [properties] Properties to set
          */
-        function Motion(properties) {
+        function MotionInfo(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -492,51 +738,51 @@ $root.protocol = (function() {
         }
 
         /**
-         * Motion uid.
+         * MotionInfo uid.
          * @member {number} uid
-         * @memberof protocol.Motion
+         * @memberof protocol.MotionInfo
          * @instance
          */
-        Motion.prototype.uid = 0;
+        MotionInfo.prototype.uid = 0;
 
         /**
-         * Motion x.
+         * MotionInfo x.
          * @member {number} x
-         * @memberof protocol.Motion
+         * @memberof protocol.MotionInfo
          * @instance
          */
-        Motion.prototype.x = 0;
+        MotionInfo.prototype.x = 0;
 
         /**
-         * Motion y.
+         * MotionInfo y.
          * @member {number} y
-         * @memberof protocol.Motion
+         * @memberof protocol.MotionInfo
          * @instance
          */
-        Motion.prototype.y = 0;
+        MotionInfo.prototype.y = 0;
 
         /**
-         * Creates a new Motion instance using the specified properties.
+         * Creates a new MotionInfo instance using the specified properties.
          * @function create
-         * @memberof protocol.Motion
+         * @memberof protocol.MotionInfo
          * @static
-         * @param {protocol.IMotion=} [properties] Properties to set
-         * @returns {protocol.Motion} Motion instance
+         * @param {protocol.IMotionInfo=} [properties] Properties to set
+         * @returns {protocol.MotionInfo} MotionInfo instance
          */
-        Motion.create = function create(properties) {
-            return new Motion(properties);
+        MotionInfo.create = function create(properties) {
+            return new MotionInfo(properties);
         };
 
         /**
-         * Encodes the specified Motion message. Does not implicitly {@link protocol.Motion.verify|verify} messages.
+         * Encodes the specified MotionInfo message. Does not implicitly {@link protocol.MotionInfo.verify|verify} messages.
          * @function encode
-         * @memberof protocol.Motion
+         * @memberof protocol.MotionInfo
          * @static
-         * @param {protocol.IMotion} message Motion message or plain object to encode
+         * @param {protocol.IMotionInfo} message MotionInfo message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        Motion.encode = function encode(message, writer) {
+        MotionInfo.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
@@ -549,33 +795,33 @@ $root.protocol = (function() {
         };
 
         /**
-         * Encodes the specified Motion message, length delimited. Does not implicitly {@link protocol.Motion.verify|verify} messages.
+         * Encodes the specified MotionInfo message, length delimited. Does not implicitly {@link protocol.MotionInfo.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof protocol.Motion
+         * @memberof protocol.MotionInfo
          * @static
-         * @param {protocol.IMotion} message Motion message or plain object to encode
+         * @param {protocol.IMotionInfo} message MotionInfo message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        Motion.encodeDelimited = function encodeDelimited(message, writer) {
+        MotionInfo.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a Motion message from the specified reader or buffer.
+         * Decodes a MotionInfo message from the specified reader or buffer.
          * @function decode
-         * @memberof protocol.Motion
+         * @memberof protocol.MotionInfo
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {protocol.Motion} Motion
+         * @returns {protocol.MotionInfo} MotionInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        Motion.decode = function decode(reader, length) {
+        MotionInfo.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.Motion();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.MotionInfo();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -597,30 +843,30 @@ $root.protocol = (function() {
         };
 
         /**
-         * Decodes a Motion message from the specified reader or buffer, length delimited.
+         * Decodes a MotionInfo message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof protocol.Motion
+         * @memberof protocol.MotionInfo
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {protocol.Motion} Motion
+         * @returns {protocol.MotionInfo} MotionInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        Motion.decodeDelimited = function decodeDelimited(reader) {
+        MotionInfo.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a Motion message.
+         * Verifies a MotionInfo message.
          * @function verify
-         * @memberof protocol.Motion
+         * @memberof protocol.MotionInfo
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        Motion.verify = function verify(message) {
+        MotionInfo.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.uid != null && message.hasOwnProperty("uid"))
@@ -636,17 +882,17 @@ $root.protocol = (function() {
         };
 
         /**
-         * Creates a Motion message from a plain object. Also converts values to their respective internal types.
+         * Creates a MotionInfo message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof protocol.Motion
+         * @memberof protocol.MotionInfo
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {protocol.Motion} Motion
+         * @returns {protocol.MotionInfo} MotionInfo
          */
-        Motion.fromObject = function fromObject(object) {
-            if (object instanceof $root.protocol.Motion)
+        MotionInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.protocol.MotionInfo)
                 return object;
-            var message = new $root.protocol.Motion();
+            var message = new $root.protocol.MotionInfo();
             if (object.uid != null)
                 message.uid = object.uid >>> 0;
             if (object.x != null)
@@ -657,15 +903,15 @@ $root.protocol = (function() {
         };
 
         /**
-         * Creates a plain object from a Motion message. Also converts values to other types if specified.
+         * Creates a plain object from a MotionInfo message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof protocol.Motion
+         * @memberof protocol.MotionInfo
          * @static
-         * @param {protocol.Motion} message Motion
+         * @param {protocol.MotionInfo} message MotionInfo
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        Motion.toObject = function toObject(message, options) {
+        MotionInfo.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -684,17 +930,17 @@ $root.protocol = (function() {
         };
 
         /**
-         * Converts this Motion to JSON.
+         * Converts this MotionInfo to JSON.
          * @function toJSON
-         * @memberof protocol.Motion
+         * @memberof protocol.MotionInfo
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        Motion.prototype.toJSON = function toJSON() {
+        MotionInfo.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return Motion;
+        return MotionInfo;
     })();
 
     return protocol;

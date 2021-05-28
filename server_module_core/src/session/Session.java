@@ -22,6 +22,7 @@ public class Session {
         quests = new ConcurrentLinkedDeque<Runnable>();
         channel = ctx.channel();
         channelId = channel.id().asLongText();
+        id = channel.id().asLongText();
         SessionManager.getInstance().add(this);
     }
 

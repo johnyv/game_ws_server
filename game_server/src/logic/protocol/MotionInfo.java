@@ -5,28 +5,28 @@ package logic.protocol;
 
 /**
  * <pre>
- * 心跳测试
+ *motion
  * </pre>
  *
- * Protobuf type {@code protocol.HeartBeat}
+ * Protobuf type {@code protocol.MotionInfo}
  */
-public final class HeartBeat extends
+public final class MotionInfo extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:protocol.HeartBeat)
-    HeartBeatOrBuilder {
+    // @@protoc_insertion_point(message_implements:protocol.MotionInfo)
+    MotionInfoOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use HeartBeat.newBuilder() to construct.
-  private HeartBeat(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use MotionInfo.newBuilder() to construct.
+  private MotionInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private HeartBeat() {
+  private MotionInfo() {
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new HeartBeat();
+    return new MotionInfo();
   }
 
   @java.lang.Override
@@ -34,7 +34,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private HeartBeat(
+  private MotionInfo(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -54,7 +54,17 @@ private static final long serialVersionUID = 0L;
             break;
           case 8: {
 
-            systemCurrtime_ = input.readInt64();
+            uid_ = input.readUInt32();
+            break;
+          }
+          case 21: {
+
+            x_ = input.readFloat();
+            break;
+          }
+          case 29: {
+
+            y_ = input.readFloat();
             break;
           }
           default: {
@@ -78,30 +88,48 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return logic.protocol.Protocol.internal_static_protocol_HeartBeat_descriptor;
+    return logic.protocol.Protocol.internal_static_protocol_MotionInfo_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return logic.protocol.Protocol.internal_static_protocol_HeartBeat_fieldAccessorTable
+    return logic.protocol.Protocol.internal_static_protocol_MotionInfo_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            logic.protocol.HeartBeat.class, logic.protocol.HeartBeat.Builder.class);
+            logic.protocol.MotionInfo.class, logic.protocol.MotionInfo.Builder.class);
   }
 
-  public static final int SYSTEM_CURRTIME_FIELD_NUMBER = 1;
-  private long systemCurrtime_;
+  public static final int UID_FIELD_NUMBER = 1;
+  private int uid_;
   /**
-   * <pre>
-   *服务器当前时间
-   * </pre>
-   *
-   * <code>int64 system_currtime = 1;</code>
-   * @return The systemCurrtime.
+   * <code>uint32 uid = 1;</code>
+   * @return The uid.
    */
   @java.lang.Override
-  public long getSystemCurrtime() {
-    return systemCurrtime_;
+  public int getUid() {
+    return uid_;
+  }
+
+  public static final int X_FIELD_NUMBER = 2;
+  private float x_;
+  /**
+   * <code>float x = 2;</code>
+   * @return The x.
+   */
+  @java.lang.Override
+  public float getX() {
+    return x_;
+  }
+
+  public static final int Y_FIELD_NUMBER = 3;
+  private float y_;
+  /**
+   * <code>float y = 3;</code>
+   * @return The y.
+   */
+  @java.lang.Override
+  public float getY() {
+    return y_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -118,8 +146,14 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (systemCurrtime_ != 0L) {
-      output.writeInt64(1, systemCurrtime_);
+    if (uid_ != 0) {
+      output.writeUInt32(1, uid_);
+    }
+    if (x_ != 0F) {
+      output.writeFloat(2, x_);
+    }
+    if (y_ != 0F) {
+      output.writeFloat(3, y_);
     }
     unknownFields.writeTo(output);
   }
@@ -130,9 +164,17 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (systemCurrtime_ != 0L) {
+    if (uid_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt64Size(1, systemCurrtime_);
+        .computeUInt32Size(1, uid_);
+    }
+    if (x_ != 0F) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeFloatSize(2, x_);
+    }
+    if (y_ != 0F) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeFloatSize(3, y_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -144,13 +186,19 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof logic.protocol.HeartBeat)) {
+    if (!(obj instanceof logic.protocol.MotionInfo)) {
       return super.equals(obj);
     }
-    logic.protocol.HeartBeat other = (logic.protocol.HeartBeat) obj;
+    logic.protocol.MotionInfo other = (logic.protocol.MotionInfo) obj;
 
-    if (getSystemCurrtime()
-        != other.getSystemCurrtime()) return false;
+    if (getUid()
+        != other.getUid()) return false;
+    if (java.lang.Float.floatToIntBits(getX())
+        != java.lang.Float.floatToIntBits(
+            other.getX())) return false;
+    if (java.lang.Float.floatToIntBits(getY())
+        != java.lang.Float.floatToIntBits(
+            other.getY())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -162,77 +210,82 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + SYSTEM_CURRTIME_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        getSystemCurrtime());
+    hash = (37 * hash) + UID_FIELD_NUMBER;
+    hash = (53 * hash) + getUid();
+    hash = (37 * hash) + X_FIELD_NUMBER;
+    hash = (53 * hash) + java.lang.Float.floatToIntBits(
+        getX());
+    hash = (37 * hash) + Y_FIELD_NUMBER;
+    hash = (53 * hash) + java.lang.Float.floatToIntBits(
+        getY());
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static logic.protocol.HeartBeat parseFrom(
+  public static logic.protocol.MotionInfo parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static logic.protocol.HeartBeat parseFrom(
+  public static logic.protocol.MotionInfo parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static logic.protocol.HeartBeat parseFrom(
+  public static logic.protocol.MotionInfo parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static logic.protocol.HeartBeat parseFrom(
+  public static logic.protocol.MotionInfo parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static logic.protocol.HeartBeat parseFrom(byte[] data)
+  public static logic.protocol.MotionInfo parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static logic.protocol.HeartBeat parseFrom(
+  public static logic.protocol.MotionInfo parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static logic.protocol.HeartBeat parseFrom(java.io.InputStream input)
+  public static logic.protocol.MotionInfo parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static logic.protocol.HeartBeat parseFrom(
+  public static logic.protocol.MotionInfo parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static logic.protocol.HeartBeat parseDelimitedFrom(java.io.InputStream input)
+  public static logic.protocol.MotionInfo parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static logic.protocol.HeartBeat parseDelimitedFrom(
+  public static logic.protocol.MotionInfo parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static logic.protocol.HeartBeat parseFrom(
+  public static logic.protocol.MotionInfo parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static logic.protocol.HeartBeat parseFrom(
+  public static logic.protocol.MotionInfo parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -245,7 +298,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(logic.protocol.HeartBeat prototype) {
+  public static Builder newBuilder(logic.protocol.MotionInfo prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -262,29 +315,29 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * 心跳测试
+   *motion
    * </pre>
    *
-   * Protobuf type {@code protocol.HeartBeat}
+   * Protobuf type {@code protocol.MotionInfo}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:protocol.HeartBeat)
-      logic.protocol.HeartBeatOrBuilder {
+      // @@protoc_insertion_point(builder_implements:protocol.MotionInfo)
+      logic.protocol.MotionInfoOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return logic.protocol.Protocol.internal_static_protocol_HeartBeat_descriptor;
+      return logic.protocol.Protocol.internal_static_protocol_MotionInfo_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return logic.protocol.Protocol.internal_static_protocol_HeartBeat_fieldAccessorTable
+      return logic.protocol.Protocol.internal_static_protocol_MotionInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              logic.protocol.HeartBeat.class, logic.protocol.HeartBeat.Builder.class);
+              logic.protocol.MotionInfo.class, logic.protocol.MotionInfo.Builder.class);
     }
 
-    // Construct using logic.protocol.HeartBeat.newBuilder()
+    // Construct using logic.protocol.MotionInfo.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -302,7 +355,11 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      systemCurrtime_ = 0L;
+      uid_ = 0;
+
+      x_ = 0F;
+
+      y_ = 0F;
 
       return this;
     }
@@ -310,17 +367,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return logic.protocol.Protocol.internal_static_protocol_HeartBeat_descriptor;
+      return logic.protocol.Protocol.internal_static_protocol_MotionInfo_descriptor;
     }
 
     @java.lang.Override
-    public logic.protocol.HeartBeat getDefaultInstanceForType() {
-      return logic.protocol.HeartBeat.getDefaultInstance();
+    public logic.protocol.MotionInfo getDefaultInstanceForType() {
+      return logic.protocol.MotionInfo.getDefaultInstance();
     }
 
     @java.lang.Override
-    public logic.protocol.HeartBeat build() {
-      logic.protocol.HeartBeat result = buildPartial();
+    public logic.protocol.MotionInfo build() {
+      logic.protocol.MotionInfo result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -328,9 +385,11 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public logic.protocol.HeartBeat buildPartial() {
-      logic.protocol.HeartBeat result = new logic.protocol.HeartBeat(this);
-      result.systemCurrtime_ = systemCurrtime_;
+    public logic.protocol.MotionInfo buildPartial() {
+      logic.protocol.MotionInfo result = new logic.protocol.MotionInfo(this);
+      result.uid_ = uid_;
+      result.x_ = x_;
+      result.y_ = y_;
       onBuilt();
       return result;
     }
@@ -369,18 +428,24 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof logic.protocol.HeartBeat) {
-        return mergeFrom((logic.protocol.HeartBeat)other);
+      if (other instanceof logic.protocol.MotionInfo) {
+        return mergeFrom((logic.protocol.MotionInfo)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(logic.protocol.HeartBeat other) {
-      if (other == logic.protocol.HeartBeat.getDefaultInstance()) return this;
-      if (other.getSystemCurrtime() != 0L) {
-        setSystemCurrtime(other.getSystemCurrtime());
+    public Builder mergeFrom(logic.protocol.MotionInfo other) {
+      if (other == logic.protocol.MotionInfo.getDefaultInstance()) return this;
+      if (other.getUid() != 0) {
+        setUid(other.getUid());
+      }
+      if (other.getX() != 0F) {
+        setX(other.getX());
+      }
+      if (other.getY() != 0F) {
+        setY(other.getY());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -397,11 +462,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      logic.protocol.HeartBeat parsedMessage = null;
+      logic.protocol.MotionInfo parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (logic.protocol.HeartBeat) e.getUnfinishedMessage();
+        parsedMessage = (logic.protocol.MotionInfo) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -411,45 +476,95 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private long systemCurrtime_ ;
+    private int uid_ ;
     /**
-     * <pre>
-     *服务器当前时间
-     * </pre>
-     *
-     * <code>int64 system_currtime = 1;</code>
-     * @return The systemCurrtime.
+     * <code>uint32 uid = 1;</code>
+     * @return The uid.
      */
     @java.lang.Override
-    public long getSystemCurrtime() {
-      return systemCurrtime_;
+    public int getUid() {
+      return uid_;
     }
     /**
-     * <pre>
-     *服务器当前时间
-     * </pre>
-     *
-     * <code>int64 system_currtime = 1;</code>
-     * @param value The systemCurrtime to set.
+     * <code>uint32 uid = 1;</code>
+     * @param value The uid to set.
      * @return This builder for chaining.
      */
-    public Builder setSystemCurrtime(long value) {
+    public Builder setUid(int value) {
       
-      systemCurrtime_ = value;
+      uid_ = value;
       onChanged();
       return this;
     }
     /**
-     * <pre>
-     *服务器当前时间
-     * </pre>
-     *
-     * <code>int64 system_currtime = 1;</code>
+     * <code>uint32 uid = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearSystemCurrtime() {
+    public Builder clearUid() {
       
-      systemCurrtime_ = 0L;
+      uid_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private float x_ ;
+    /**
+     * <code>float x = 2;</code>
+     * @return The x.
+     */
+    @java.lang.Override
+    public float getX() {
+      return x_;
+    }
+    /**
+     * <code>float x = 2;</code>
+     * @param value The x to set.
+     * @return This builder for chaining.
+     */
+    public Builder setX(float value) {
+      
+      x_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>float x = 2;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearX() {
+      
+      x_ = 0F;
+      onChanged();
+      return this;
+    }
+
+    private float y_ ;
+    /**
+     * <code>float y = 3;</code>
+     * @return The y.
+     */
+    @java.lang.Override
+    public float getY() {
+      return y_;
+    }
+    /**
+     * <code>float y = 3;</code>
+     * @param value The y to set.
+     * @return This builder for chaining.
+     */
+    public Builder setY(float value) {
+      
+      y_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>float y = 3;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearY() {
+      
+      y_ = 0F;
       onChanged();
       return this;
     }
@@ -466,41 +581,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:protocol.HeartBeat)
+    // @@protoc_insertion_point(builder_scope:protocol.MotionInfo)
   }
 
-  // @@protoc_insertion_point(class_scope:protocol.HeartBeat)
-  private static final logic.protocol.HeartBeat DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:protocol.MotionInfo)
+  private static final logic.protocol.MotionInfo DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new logic.protocol.HeartBeat();
+    DEFAULT_INSTANCE = new logic.protocol.MotionInfo();
   }
 
-  public static logic.protocol.HeartBeat getDefaultInstance() {
+  public static logic.protocol.MotionInfo getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<HeartBeat>
-      PARSER = new com.google.protobuf.AbstractParser<HeartBeat>() {
+  private static final com.google.protobuf.Parser<MotionInfo>
+      PARSER = new com.google.protobuf.AbstractParser<MotionInfo>() {
     @java.lang.Override
-    public HeartBeat parsePartialFrom(
+    public MotionInfo parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new HeartBeat(input, extensionRegistry);
+      return new MotionInfo(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<HeartBeat> parser() {
+  public static com.google.protobuf.Parser<MotionInfo> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<HeartBeat> getParserForType() {
+  public com.google.protobuf.Parser<MotionInfo> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public logic.protocol.HeartBeat getDefaultInstanceForType() {
+  public logic.protocol.MotionInfo getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

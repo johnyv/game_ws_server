@@ -3,15 +3,11 @@
 
 package logic.protocol;
 
-public interface HeartBeatOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:protocol.HeartBeat)
+public interface HBInfoOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:protocol.HBInfo)
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <pre>
-   *服务器当前时间
-   * </pre>
-   *
    * <code>int64 system_currtime = 1;</code>
    * @return The systemCurrtime.
    */

@@ -33,7 +33,7 @@ public class Dispatcher {
         return proc;
     }
 
-    public void dispatch(final Session info, final ProtoMsg packet) {
+    public void dispatch(final Session session, final ProtoMsg packet) {
         int code = packet.getCode();
         final Processor proc = get(code);
         if (proc == null) {
@@ -43,15 +43,15 @@ public class Dispatcher {
         Runnable exec = new Runnable() {
             @Override
             public void run() {
-                process(proc, info, packet);
+                process(proc, session, packet);
             }
         };
-        info.addQuest(exec);
+        session.addQuest(exec);
     }
 
-    private void process(final Processor proc, final Session info, final ProtoMsg packet) {
+    private void process(final Processor proc, final Session session, final ProtoMsg packet) {
         try {
-            proc.process(info, packet);
+            proc.process(session, packet);
         } catch (Exception e) {
         }
     }

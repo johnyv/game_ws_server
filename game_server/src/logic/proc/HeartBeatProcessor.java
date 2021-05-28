@@ -1,7 +1,7 @@
 package logic.proc;
 
-import logic.protocol.HeartBeat;
 import abstracted.Processor;
+import logic.protocol.HBInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import packet.ProtoMsg;
@@ -9,11 +9,11 @@ import session.Session;
 
 public class HeartBeatProcessor extends Processor {
     private static Logger logger = LoggerFactory.getLogger(HeartBeatProcessor.class);
-    HeartBeat hb;
+    HBInfo hb;
 
     @Override
     protected void init(Session session, ProtoMsg protoMsg) throws Exception {
-        hb = HeartBeat.parseFrom(protoMsg.getData());
+        hb = HBInfo.parseFrom(protoMsg.getData());
     }
 
     @Override
@@ -22,7 +22,7 @@ public class HeartBeatProcessor extends Processor {
 
 //        logger.info("SystemCurrtime->" + hb.getSystemCurrtime());
 
-        HeartBeat.Builder hbr = HeartBeat.newBuilder();
+        HBInfo.Builder hbr = HBInfo.newBuilder();
         hbr.setSystemCurrtime(System.currentTimeMillis());
 
         byte[] bytes = ProtoMsg.pack(1001, hbr.build());

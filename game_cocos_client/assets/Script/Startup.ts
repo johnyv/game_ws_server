@@ -10,7 +10,7 @@ export default class Startup extends cc.Component {
         NET.init("ws://127.0.0.1:8090/ws");
         NET.connect(() => {
             cc.log("websocket connected.");
-            cc.director.loadScene("helloworld");
+            cc.director.loadScene("login");
         });
 
     }

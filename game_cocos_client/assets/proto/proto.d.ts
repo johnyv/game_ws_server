@@ -104,193 +104,295 @@ export namespace protocol {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a HeartBeat. */
-    interface IHeartBeat {
+    /** Properties of a LoginInfo. */
+    interface ILoginInfo {
 
-        /** HeartBeat systemCurrtime */
-        systemCurrtime?: (number|Long|null);
+        /** LoginInfo id */
+        id?: (string|null);
+
+        /** LoginInfo pwd */
+        pwd?: (string|null);
+
+        /** LoginInfo enterTime */
+        enterTime?: (number|Long|null);
     }
 
-    /** Represents a HeartBeat. */
-    class HeartBeat implements IHeartBeat {
+    /** Represents a LoginInfo. */
+    class LoginInfo implements ILoginInfo {
 
         /**
-         * Constructs a new HeartBeat.
+         * Constructs a new LoginInfo.
          * @param [properties] Properties to set
          */
-        constructor(properties?: protocol.IHeartBeat);
+        constructor(properties?: protocol.ILoginInfo);
 
-        /** HeartBeat systemCurrtime. */
-        public systemCurrtime: (number|Long);
+        /** LoginInfo id. */
+        public id: string;
+
+        /** LoginInfo pwd. */
+        public pwd: string;
+
+        /** LoginInfo enterTime. */
+        public enterTime: (number|Long);
 
         /**
-         * Creates a new HeartBeat instance using the specified properties.
+         * Creates a new LoginInfo instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns HeartBeat instance
+         * @returns LoginInfo instance
          */
-        public static create(properties?: protocol.IHeartBeat): protocol.HeartBeat;
+        public static create(properties?: protocol.ILoginInfo): protocol.LoginInfo;
 
         /**
-         * Encodes the specified HeartBeat message. Does not implicitly {@link protocol.HeartBeat.verify|verify} messages.
-         * @param message HeartBeat message or plain object to encode
+         * Encodes the specified LoginInfo message. Does not implicitly {@link protocol.LoginInfo.verify|verify} messages.
+         * @param message LoginInfo message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: protocol.IHeartBeat, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: protocol.ILoginInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified HeartBeat message, length delimited. Does not implicitly {@link protocol.HeartBeat.verify|verify} messages.
-         * @param message HeartBeat message or plain object to encode
+         * Encodes the specified LoginInfo message, length delimited. Does not implicitly {@link protocol.LoginInfo.verify|verify} messages.
+         * @param message LoginInfo message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: protocol.IHeartBeat, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: protocol.ILoginInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a HeartBeat message from the specified reader or buffer.
+         * Decodes a LoginInfo message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns HeartBeat
+         * @returns LoginInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protocol.HeartBeat;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protocol.LoginInfo;
 
         /**
-         * Decodes a HeartBeat message from the specified reader or buffer, length delimited.
+         * Decodes a LoginInfo message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns HeartBeat
+         * @returns LoginInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protocol.HeartBeat;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protocol.LoginInfo;
 
         /**
-         * Verifies a HeartBeat message.
+         * Verifies a LoginInfo message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a HeartBeat message from a plain object. Also converts values to their respective internal types.
+         * Creates a LoginInfo message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns HeartBeat
+         * @returns LoginInfo
          */
-        public static fromObject(object: { [k: string]: any }): protocol.HeartBeat;
+        public static fromObject(object: { [k: string]: any }): protocol.LoginInfo;
 
         /**
-         * Creates a plain object from a HeartBeat message. Also converts values to other types if specified.
-         * @param message HeartBeat
+         * Creates a plain object from a LoginInfo message. Also converts values to other types if specified.
+         * @param message LoginInfo
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: protocol.HeartBeat, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: protocol.LoginInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this HeartBeat to JSON.
+         * Converts this LoginInfo to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a Motion. */
-    interface IMotion {
+    /** Properties of a HBInfo. */
+    interface IHBInfo {
 
-        /** Motion uid */
-        uid?: (number|null);
-
-        /** Motion x */
-        x?: (number|null);
-
-        /** Motion y */
-        y?: (number|null);
+        /** HBInfo systemCurrtime */
+        systemCurrtime?: (number|Long|null);
     }
 
-    /** Represents a Motion. */
-    class Motion implements IMotion {
+    /** Represents a HBInfo. */
+    class HBInfo implements IHBInfo {
 
         /**
-         * Constructs a new Motion.
+         * Constructs a new HBInfo.
          * @param [properties] Properties to set
          */
-        constructor(properties?: protocol.IMotion);
+        constructor(properties?: protocol.IHBInfo);
 
-        /** Motion uid. */
-        public uid: number;
-
-        /** Motion x. */
-        public x: number;
-
-        /** Motion y. */
-        public y: number;
+        /** HBInfo systemCurrtime. */
+        public systemCurrtime: (number|Long);
 
         /**
-         * Creates a new Motion instance using the specified properties.
+         * Creates a new HBInfo instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns Motion instance
+         * @returns HBInfo instance
          */
-        public static create(properties?: protocol.IMotion): protocol.Motion;
+        public static create(properties?: protocol.IHBInfo): protocol.HBInfo;
 
         /**
-         * Encodes the specified Motion message. Does not implicitly {@link protocol.Motion.verify|verify} messages.
-         * @param message Motion message or plain object to encode
+         * Encodes the specified HBInfo message. Does not implicitly {@link protocol.HBInfo.verify|verify} messages.
+         * @param message HBInfo message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: protocol.IMotion, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: protocol.IHBInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified Motion message, length delimited. Does not implicitly {@link protocol.Motion.verify|verify} messages.
-         * @param message Motion message or plain object to encode
+         * Encodes the specified HBInfo message, length delimited. Does not implicitly {@link protocol.HBInfo.verify|verify} messages.
+         * @param message HBInfo message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: protocol.IMotion, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: protocol.IHBInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a Motion message from the specified reader or buffer.
+         * Decodes a HBInfo message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns Motion
+         * @returns HBInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protocol.Motion;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protocol.HBInfo;
 
         /**
-         * Decodes a Motion message from the specified reader or buffer, length delimited.
+         * Decodes a HBInfo message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns Motion
+         * @returns HBInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protocol.Motion;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protocol.HBInfo;
 
         /**
-         * Verifies a Motion message.
+         * Verifies a HBInfo message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a Motion message from a plain object. Also converts values to their respective internal types.
+         * Creates a HBInfo message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns Motion
+         * @returns HBInfo
          */
-        public static fromObject(object: { [k: string]: any }): protocol.Motion;
+        public static fromObject(object: { [k: string]: any }): protocol.HBInfo;
 
         /**
-         * Creates a plain object from a Motion message. Also converts values to other types if specified.
-         * @param message Motion
+         * Creates a plain object from a HBInfo message. Also converts values to other types if specified.
+         * @param message HBInfo
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: protocol.Motion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: protocol.HBInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this Motion to JSON.
+         * Converts this HBInfo to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a MotionInfo. */
+    interface IMotionInfo {
+
+        /** MotionInfo uid */
+        uid?: (number|null);
+
+        /** MotionInfo x */
+        x?: (number|null);
+
+        /** MotionInfo y */
+        y?: (number|null);
+    }
+
+    /** Represents a MotionInfo. */
+    class MotionInfo implements IMotionInfo {
+
+        /**
+         * Constructs a new MotionInfo.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: protocol.IMotionInfo);
+
+        /** MotionInfo uid. */
+        public uid: number;
+
+        /** MotionInfo x. */
+        public x: number;
+
+        /** MotionInfo y. */
+        public y: number;
+
+        /**
+         * Creates a new MotionInfo instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns MotionInfo instance
+         */
+        public static create(properties?: protocol.IMotionInfo): protocol.MotionInfo;
+
+        /**
+         * Encodes the specified MotionInfo message. Does not implicitly {@link protocol.MotionInfo.verify|verify} messages.
+         * @param message MotionInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: protocol.IMotionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified MotionInfo message, length delimited. Does not implicitly {@link protocol.MotionInfo.verify|verify} messages.
+         * @param message MotionInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: protocol.IMotionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a MotionInfo message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns MotionInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protocol.MotionInfo;
+
+        /**
+         * Decodes a MotionInfo message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns MotionInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protocol.MotionInfo;
+
+        /**
+         * Verifies a MotionInfo message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a MotionInfo message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns MotionInfo
+         */
+        public static fromObject(object: { [k: string]: any }): protocol.MotionInfo;
+
+        /**
+         * Creates a plain object from a MotionInfo message. Also converts values to other types if specified.
+         * @param message MotionInfo
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: protocol.MotionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this MotionInfo to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

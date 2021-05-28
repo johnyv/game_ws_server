@@ -3,8 +3,8 @@
 
 package logic.protocol;
 
-public interface MotionOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:protocol.Motion)
+public interface MotionInfoOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:protocol.MotionInfo)
     com.google.protobuf.MessageOrBuilder {
 
   /**

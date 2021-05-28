@@ -10,14 +10,18 @@ message Player{
     string name = 2;
     uint64 enterTime = 3;
 }
-
-// 心跳测试
-message HeartBeat{
-	//服务器当前时间
+//login
+message LoginInfo{
+    string id = 1;
+    string pwd = 2;
+    uint64 enterTime = 3;
+}
+//heartbeat
+message HBInfo{
 	int64 system_currtime = 1;
 }
-
-message Motion{
+//motion
+message MotionInfo{
     uint32 uid =1;
     float x = 2;
     float y = 3;
