@@ -22,6 +22,15 @@ public class UserManager {
         users.put(user.getUid(), user);
     }
 
+    public void removeUserBySessionId(String sessionId){
+        for (Iterator iterator = users.values().iterator(); iterator.hasNext(); ) {
+            User user = (User) iterator.next();
+            if (user.getSessionId() == sessionId) {
+                users.remove(user.getUid());
+            }
+        }
+    }
+
     public void sendToAll(byte[] bytes){
         for (Iterator iterator = users.values().iterator(); iterator.hasNext(); ) {
             User user = (User) iterator.next();

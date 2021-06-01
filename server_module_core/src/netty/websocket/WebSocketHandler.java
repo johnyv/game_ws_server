@@ -28,13 +28,23 @@ public class WebSocketHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
-//        SocketChannel channel = (SocketChannel) ctx.channel();
         logger.info("address:" + ctx.channel().remoteAddress().toString());
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         super.channelInactive(ctx);
+
+        Session session = new Session(ctx);
+
+        ProtoMsg pack = new ProtoMsg();
+        pack.setLength(8);
+        pack.setCode(9999);
+        pack.setData(new byte[0]);
+
+        // todo: code 9999 processor.
+        Dispatcher.getInstance().dispatch(session, pack);
+
         logger.info("close:" + ctx.channel().localAddress().toString());
     }
 

@@ -59,8 +59,10 @@ class NetHandler {
     }
 
     private process(event: MessageEvent): void {
-        var arrBuf = event.data;
-
+        var arrBuf:ArrayBuffer = event.data as ArrayBuffer;
+        var byteArr:Uint8Array = new Uint8Array(arrBuf);
+        cc.log(byteArr.byteLength);
+        
         var msg = ProtoMsg.unpack(arrBuf);
         EVENTS.emit(msg.code, msg.dataBytes);
     }

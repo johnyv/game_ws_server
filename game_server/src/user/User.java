@@ -17,6 +17,10 @@ public class User {
         return uid;
     }
 
+    public String getSessionId(){
+        return session.getId();
+    }
+
     public void send(byte[] bytes){
         session.write(bytes);
     }

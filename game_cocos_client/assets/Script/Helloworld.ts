@@ -7,7 +7,11 @@ import LoginInfo = protocol.LoginInfo;
 
 import { NET } from "./net/NetHandler";
 import { EVENTS } from "./util/EventHandler";
+import { USERMANAGER } from "./user/UserManager";
+
 import ProtoMsg from "./util/ProtoMsg";
+import User from "./user/User";
+import { LOCALDATA } from "./data/LocalData";
 
 @ccclass
 export default class Helloworld extends cc.Component {
@@ -23,15 +27,14 @@ export default class Helloworld extends cc.Component {
     start() {
         // init logic
         this.label.string = this.text;
-        cc.log(this.cocos);
     }
 
     onLoad() {
         let self = this;
 
         EVENTS.on(1001, this.onHeart);
-        EVENTS.on(2002, this.onPlayerEnter);
-        EVENTS.on(2003, this.onPlayerMove);
+        EVENTS.on(2002, this.onPlayerEnter.bind(this));
+        EVENTS.on(2003, this.onPlayerMove.bind(this));
 
         this.schedule(() => {
             if (NET.isConnected) {
@@ -50,18 +53,32 @@ export default class Helloworld extends cc.Component {
 
     onHeart(data: Uint8Array) {
         let decoded = HBInfo.decode(data);
-        cc.log(decoded);
+        // cc.log(decoded);
     }
 
     onPlayerEnter(data: Uint8Array) {
         let decoded = LoginInfo.decode(data);
         cc.log("Player enter.");
+
+        let user: User = new User(decoded.id, this.cocos);
+        user.addToScene();
+        USERMANAGER.add(user);
+
         cc.log(decoded);
     }
 
     onPlayerMove(data: Uint8Array) {
         let decoded = MotionInfo.decode(data);
-        cc.log("Player enter.");
+        cc.log("Player move.");
+        var pt: cc.Vec2 = new cc.Vec2(decoded.x, decoded.y);
+
+        // this.cocos.node.runAction(
+        //     cc.moveTo(1, pt)
+        // );
+        let user: User = USERMANAGER.getUser(decoded.uid.toString());
+        if (user) {
+            user.move(pt);
+        }
         cc.log(decoded);
     }
 
@@ -70,7 +87,7 @@ export default class Helloworld extends cc.Component {
         cc.log("move x:", pt.x);
         cc.log("move y:", pt.y);
 
-        var msg = MotionInfo.create({ uid: 11,x: pt.x, y: pt.y });
+        var msg = MotionInfo.create({ uid: Number(LOCALDATA.getUid()), x: pt.x, y: pt.y });
         var uint8Arr = MotionInfo.encode(msg).finish();
 
         var msgBuf = ProtoMsg.pack(1003, uint8Arr);

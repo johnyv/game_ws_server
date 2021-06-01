@@ -1,7 +1,5 @@
 package session;
 
-import session.SessionManager;
-
 public class SessionThread implements Runnable {
     private Thread serviceThread;
     private volatile boolean running;

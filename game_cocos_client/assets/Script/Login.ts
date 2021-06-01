@@ -7,6 +7,8 @@ import { NET } from "./net/NetHandler";
 import { EVENTS } from "./util/EventHandler";
 import ProtoMsg from "./util/ProtoMsg";
 
+import {LOCALDATA} from "./data/LocalData";
+
 @ccclass
 export default class NewClass extends cc.Component {
 
@@ -31,6 +33,9 @@ export default class NewClass extends cc.Component {
                     pwd:self.nameEditbox.string,
                     enterTime: new Date().getTime()
                 });
+
+                LOCALDATA.setUid(self.idEditbox.string);
+                                
                 let uint8Arr = LoginInfo.encode(msg).finish();
 
                 let msgBuf = ProtoMsg.pack(1002, uint8Arr);

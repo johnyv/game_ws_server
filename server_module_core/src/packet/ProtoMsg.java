@@ -66,7 +66,7 @@ public class ProtoMsg {
     }
 
     public static byte[] pack(int code, MessageLite proto) {
-        byte data[] = proto.toByteArray();
+        byte data[] = proto != null ? proto.toByteArray() : new byte[0];
         int length = data.length + 8;
         byte[] bytes = new byte[length];
         byte[] lengthBytes = ByteUtil.int2Bytes(length);
