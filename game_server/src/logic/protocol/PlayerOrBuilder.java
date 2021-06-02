@@ -8,10 +8,16 @@ public interface PlayerOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>uint32 id = 1;</code>
+   * <code>string id = 1;</code>
    * @return The id.
    */
-  int getId();
+  java.lang.String getId();
+  /**
+   * <code>string id = 1;</code>
+   * @return The bytes for id.
+   */
+  com.google.protobuf.ByteString
+      getIdBytes();
 
   /**
    * <code>string name = 2;</code>

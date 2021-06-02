@@ -8,10 +8,16 @@ public interface MotionInfoOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>uint32 uid = 1;</code>
+   * <code>string uid = 1;</code>
    * @return The uid.
    */
-  int getUid();
+  java.lang.String getUid();
+  /**
+   * <code>string uid = 1;</code>
+   * @return The bytes for uid.
+   */
+  com.google.protobuf.ByteString
+      getUidBytes();
 
   /**
    * <code>float x = 2;</code>

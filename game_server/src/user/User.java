@@ -4,17 +4,21 @@ import session.Session;
 
 public class User {
     private String uid;
-//    private String uname;
+    private String uname;
     private Session session;
 
-    public User(String uid, Session session) {
+    public User(String uid, String name, Session session) {
         this.uid = uid;
-//        this.uname = uname;
+        this.uname = name;
         this.session = session;
     }
 
     public String getUid() {
         return uid;
+    }
+
+    public String getName() {
+        return uname;
     }
 
     public String getSessionId(){

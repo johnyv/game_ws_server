@@ -120,6 +120,7 @@ public class WebSocketHandler extends ChannelInboundHandlerAdapter {
             BinaryWebSocketFrame bFrame = (BinaryWebSocketFrame) frame;
             byte[] bytes = new byte[bFrame.content().readableBytes()];
             bFrame.content().readBytes(bytes);
+            bFrame.content().release();
 
             try {
                 ProtoMsg pack = ProtoMsg.unPack(bytes);

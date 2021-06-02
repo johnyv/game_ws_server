@@ -6,7 +6,7 @@ export namespace protocol {
     interface IPlayer {
 
         /** Player id */
-        id?: (number|null);
+        id?: (string|null);
 
         /** Player name */
         name?: (string|null);
@@ -25,7 +25,7 @@ export namespace protocol {
         constructor(properties?: protocol.IPlayer);
 
         /** Player id. */
-        public id: number;
+        public id: string;
 
         /** Player name. */
         public name: string;
@@ -99,6 +99,96 @@ export namespace protocol {
 
         /**
          * Converts this Player to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a UserList. */
+    interface IUserList {
+
+        /** UserList userList */
+        userList?: (protocol.IPlayer[]|null);
+    }
+
+    /** Represents a UserList. */
+    class UserList implements IUserList {
+
+        /**
+         * Constructs a new UserList.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: protocol.IUserList);
+
+        /** UserList userList. */
+        public userList: protocol.IPlayer[];
+
+        /**
+         * Creates a new UserList instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns UserList instance
+         */
+        public static create(properties?: protocol.IUserList): protocol.UserList;
+
+        /**
+         * Encodes the specified UserList message. Does not implicitly {@link protocol.UserList.verify|verify} messages.
+         * @param message UserList message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: protocol.IUserList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified UserList message, length delimited. Does not implicitly {@link protocol.UserList.verify|verify} messages.
+         * @param message UserList message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: protocol.IUserList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a UserList message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns UserList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protocol.UserList;
+
+        /**
+         * Decodes a UserList message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns UserList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protocol.UserList;
+
+        /**
+         * Verifies a UserList message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a UserList message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns UserList
+         */
+        public static fromObject(object: { [k: string]: any }): protocol.UserList;
+
+        /**
+         * Creates a plain object from a UserList message. Also converts values to other types if specified.
+         * @param message UserList
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: protocol.UserList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this UserList to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -300,7 +390,7 @@ export namespace protocol {
     interface IMotionInfo {
 
         /** MotionInfo uid */
-        uid?: (number|null);
+        uid?: (string|null);
 
         /** MotionInfo x */
         x?: (number|null);
@@ -319,7 +409,7 @@ export namespace protocol {
         constructor(properties?: protocol.IMotionInfo);
 
         /** MotionInfo uid. */
-        public uid: number;
+        public uid: string;
 
         /** MotionInfo x. */
         public x: number;

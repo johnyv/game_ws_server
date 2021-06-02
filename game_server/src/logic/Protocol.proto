@@ -6,10 +6,15 @@ option java_multiple_files=true;
 option java_outer_classname = "Protocol";
 
 message Player{
-    uint32 id = 1;
+    string id = 1;
     string name = 2;
     uint64 enterTime = 3;
 }
+
+message UserList{
+    repeated Player userList = 1;
+}
+
 //login
 message LoginInfo{
     string id = 1;
@@ -22,7 +27,7 @@ message HBInfo{
 }
 //motion
 message MotionInfo{
-    uint32 uid =1;
+    string uid = 1;
     float x = 2;
     float y = 3;
 }

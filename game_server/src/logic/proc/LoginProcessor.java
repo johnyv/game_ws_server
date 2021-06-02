@@ -22,7 +22,7 @@ public class LoginProcessor extends Processor {
         init(session, protoMsg);
         logger.info("login id:" + loginInfo.getId());
 
-        User user = new User(loginInfo.getId(), session);
+        User user = new User(loginInfo.getId(), loginInfo.getPwd(), session);
         UserManager.getInstance().addUser(user);
 
         LoginInfo.Builder builder = LoginInfo.newBuilder();
@@ -31,6 +31,7 @@ public class LoginProcessor extends Processor {
         LoginInfo info = builder.build();
         byte[] bytes0 = ProtoMsg.pack(1002, info);
         byte[] bytes1 = ProtoMsg.pack(2002, info);
+
 
         user.send(bytes0);
         UserManager.getInstance().sendToAll(bytes1);

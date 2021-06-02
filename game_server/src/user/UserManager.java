@@ -1,14 +1,14 @@
 package user;
 
 import io.netty.channel.group.ChannelGroup;
-import session.Session;
 
 import java.util.Iterator;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class UserManager {
     private final ConcurrentHashMap<String, ChannelGroup> groupMap = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<String, User> users = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, User> userList = new ConcurrentHashMap<>();
 
     private static UserManager instance = new UserManager();
     public static UserManager getInstance(){return instance;}
@@ -16,23 +16,27 @@ public class UserManager {
     public UserManager(){}
 
     public void addUser(User user){
-        if (users.contains(user.getUid())){
+        if (userList.contains(user.getUid())){
             return;
         }
-        users.put(user.getUid(), user);
+        userList.put(user.getUid(), user);
     }
 
     public void removeUserBySessionId(String sessionId){
-        for (Iterator iterator = users.values().iterator(); iterator.hasNext(); ) {
+        for (Iterator iterator = userList.values().iterator(); iterator.hasNext(); ) {
             User user = (User) iterator.next();
             if (user.getSessionId() == sessionId) {
-                users.remove(user.getUid());
+                userList.remove(user.getUid());
             }
         }
     }
 
+    public ConcurrentHashMap getUserList(){
+        return userList;
+    }
+
     public void sendToAll(byte[] bytes){
-        for (Iterator iterator = users.values().iterator(); iterator.hasNext(); ) {
+        for (Iterator iterator = userList.values().iterator(); iterator.hasNext(); ) {
             User user = (User) iterator.next();
             if (user != null) {
                 System.out.println("player enter"+user.getUid());
@@ -42,7 +46,7 @@ public class UserManager {
     }
 
     public void alluser(){
-        for (Iterator iterator = users.values().iterator(); iterator.hasNext(); ) {
+        for (Iterator iterator = userList.values().iterator(); iterator.hasNext(); ) {
             User user = (User) iterator.next();
             if (user != null) {
                 System.out.println(user.getUid());

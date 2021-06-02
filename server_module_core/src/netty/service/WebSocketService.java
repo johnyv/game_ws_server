@@ -14,6 +14,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.SslContext;
+import io.netty.util.ResourceLeakDetector;
 import netty.websocket.WebSocketInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,6 +86,8 @@ public class WebSocketService {
                     .childOption(ChannelOption.CONNECT_TIMEOUT_MILLIS, Integer.valueOf(1000))
                     .handler(new LoggingHandler(LogLevel.INFO))
                     .childHandler(new WebSocketInitializer(sslContext));
+
+            ResourceLeakDetector.setLevel(ResourceLeakDetector.Level.ADVANCED);
 
             serverChannelFuture = serverBootstrap.bind(serverAddr).sync();
 

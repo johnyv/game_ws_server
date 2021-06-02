@@ -24,7 +24,7 @@ $root.protocol = (function() {
          * Properties of a Player.
          * @memberof protocol
          * @interface IPlayer
-         * @property {number|null} [id] Player id
+         * @property {string|null} [id] Player id
          * @property {string|null} [name] Player name
          * @property {number|Long|null} [enterTime] Player enterTime
          */
@@ -46,11 +46,11 @@ $root.protocol = (function() {
 
         /**
          * Player id.
-         * @member {number} id
+         * @member {string} id
          * @memberof protocol.Player
          * @instance
          */
-        Player.prototype.id = 0;
+        Player.prototype.id = "";
 
         /**
          * Player name.
@@ -93,7 +93,7 @@ $root.protocol = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.id != null && Object.hasOwnProperty.call(message, "id"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
             if (message.enterTime != null && Object.hasOwnProperty.call(message, "enterTime"))
@@ -133,7 +133,7 @@ $root.protocol = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.id = reader.uint32();
+                    message.id = reader.string();
                     break;
                 case 2:
                     message.name = reader.string();
@@ -177,8 +177,8 @@ $root.protocol = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.id != null && message.hasOwnProperty("id"))
-                if (!$util.isInteger(message.id))
-                    return "id: integer expected";
+                if (!$util.isString(message.id))
+                    return "id: string expected";
             if (message.name != null && message.hasOwnProperty("name"))
                 if (!$util.isString(message.name))
                     return "name: string expected";
@@ -201,7 +201,7 @@ $root.protocol = (function() {
                 return object;
             var message = new $root.protocol.Player();
             if (object.id != null)
-                message.id = object.id >>> 0;
+                message.id = String(object.id);
             if (object.name != null)
                 message.name = String(object.name);
             if (object.enterTime != null)
@@ -230,7 +230,7 @@ $root.protocol = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.id = 0;
+                object.id = "";
                 object.name = "";
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, true);
@@ -262,6 +262,214 @@ $root.protocol = (function() {
         };
 
         return Player;
+    })();
+
+    protocol.UserList = (function() {
+
+        /**
+         * Properties of a UserList.
+         * @memberof protocol
+         * @interface IUserList
+         * @property {Array.<protocol.IPlayer>|null} [userList] UserList userList
+         */
+
+        /**
+         * Constructs a new UserList.
+         * @memberof protocol
+         * @classdesc Represents a UserList.
+         * @implements IUserList
+         * @constructor
+         * @param {protocol.IUserList=} [properties] Properties to set
+         */
+        function UserList(properties) {
+            this.userList = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserList userList.
+         * @member {Array.<protocol.IPlayer>} userList
+         * @memberof protocol.UserList
+         * @instance
+         */
+        UserList.prototype.userList = $util.emptyArray;
+
+        /**
+         * Creates a new UserList instance using the specified properties.
+         * @function create
+         * @memberof protocol.UserList
+         * @static
+         * @param {protocol.IUserList=} [properties] Properties to set
+         * @returns {protocol.UserList} UserList instance
+         */
+        UserList.create = function create(properties) {
+            return new UserList(properties);
+        };
+
+        /**
+         * Encodes the specified UserList message. Does not implicitly {@link protocol.UserList.verify|verify} messages.
+         * @function encode
+         * @memberof protocol.UserList
+         * @static
+         * @param {protocol.IUserList} message UserList message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserList.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.userList != null && message.userList.length)
+                for (var i = 0; i < message.userList.length; ++i)
+                    $root.protocol.Player.encode(message.userList[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserList message, length delimited. Does not implicitly {@link protocol.UserList.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof protocol.UserList
+         * @static
+         * @param {protocol.IUserList} message UserList message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserList.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserList message from the specified reader or buffer.
+         * @function decode
+         * @memberof protocol.UserList
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {protocol.UserList} UserList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserList.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protocol.UserList();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.userList && message.userList.length))
+                        message.userList = [];
+                    message.userList.push($root.protocol.Player.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a UserList message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof protocol.UserList
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {protocol.UserList} UserList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserList.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserList message.
+         * @function verify
+         * @memberof protocol.UserList
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserList.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.userList != null && message.hasOwnProperty("userList")) {
+                if (!Array.isArray(message.userList))
+                    return "userList: array expected";
+                for (var i = 0; i < message.userList.length; ++i) {
+                    var error = $root.protocol.Player.verify(message.userList[i]);
+                    if (error)
+                        return "userList." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a UserList message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof protocol.UserList
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {protocol.UserList} UserList
+         */
+        UserList.fromObject = function fromObject(object) {
+            if (object instanceof $root.protocol.UserList)
+                return object;
+            var message = new $root.protocol.UserList();
+            if (object.userList) {
+                if (!Array.isArray(object.userList))
+                    throw TypeError(".protocol.UserList.userList: array expected");
+                message.userList = [];
+                for (var i = 0; i < object.userList.length; ++i) {
+                    if (typeof object.userList[i] !== "object")
+                        throw TypeError(".protocol.UserList.userList: object expected");
+                    message.userList[i] = $root.protocol.Player.fromObject(object.userList[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserList message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof protocol.UserList
+         * @static
+         * @param {protocol.UserList} message UserList
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserList.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.userList = [];
+            if (message.userList && message.userList.length) {
+                object.userList = [];
+                for (var j = 0; j < message.userList.length; ++j)
+                    object.userList[j] = $root.protocol.Player.toObject(message.userList[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this UserList to JSON.
+         * @function toJSON
+         * @memberof protocol.UserList
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserList.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserList;
     })();
 
     protocol.LoginInfo = (function() {
@@ -717,7 +925,7 @@ $root.protocol = (function() {
          * Properties of a MotionInfo.
          * @memberof protocol
          * @interface IMotionInfo
-         * @property {number|null} [uid] MotionInfo uid
+         * @property {string|null} [uid] MotionInfo uid
          * @property {number|null} [x] MotionInfo x
          * @property {number|null} [y] MotionInfo y
          */
@@ -739,11 +947,11 @@ $root.protocol = (function() {
 
         /**
          * MotionInfo uid.
-         * @member {number} uid
+         * @member {string} uid
          * @memberof protocol.MotionInfo
          * @instance
          */
-        MotionInfo.prototype.uid = 0;
+        MotionInfo.prototype.uid = "";
 
         /**
          * MotionInfo x.
@@ -786,7 +994,7 @@ $root.protocol = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.uid);
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uid);
             if (message.x != null && Object.hasOwnProperty.call(message, "x"))
                 writer.uint32(/* id 2, wireType 5 =*/21).float(message.x);
             if (message.y != null && Object.hasOwnProperty.call(message, "y"))
@@ -826,7 +1034,7 @@ $root.protocol = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.uid = reader.uint32();
+                    message.uid = reader.string();
                     break;
                 case 2:
                     message.x = reader.float();
@@ -870,8 +1078,8 @@ $root.protocol = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.uid != null && message.hasOwnProperty("uid"))
-                if (!$util.isInteger(message.uid))
-                    return "uid: integer expected";
+                if (!$util.isString(message.uid))
+                    return "uid: string expected";
             if (message.x != null && message.hasOwnProperty("x"))
                 if (typeof message.x !== "number")
                     return "x: number expected";
@@ -894,7 +1102,7 @@ $root.protocol = (function() {
                 return object;
             var message = new $root.protocol.MotionInfo();
             if (object.uid != null)
-                message.uid = object.uid >>> 0;
+                message.uid = String(object.uid);
             if (object.x != null)
                 message.x = Number(object.x);
             if (object.y != null)
@@ -916,7 +1124,7 @@ $root.protocol = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.uid = 0;
+                object.uid = "";
                 object.x = 0;
                 object.y = 0;
             }
