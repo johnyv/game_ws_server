@@ -11,7 +11,7 @@ import { NET } from "./net/NetHandler";
 import { EVENTS } from "./util/EventHandler";
 import { USERMANAGER } from "./user/UserManager";
 
-import ProtoMsg from "./util/ProtoMsg";
+import MsgPack from "./util/MsgPack";
 import User from "./user/User";
 import { LOCALDATA } from "./data/LocalData";
 
@@ -51,7 +51,7 @@ export default class Helloworld extends cc.Component {
                 });
                 let uint8Arr = HBInfo.encode(msg).finish();
 
-                let msgBuf = ProtoMsg.pack(1001, uint8Arr);
+                let msgBuf = MsgPack.pack(1001, uint8Arr);
                 NET.send(msgBuf);
             }
         }, 3);
@@ -59,7 +59,7 @@ export default class Helloworld extends cc.Component {
         this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd.bind(this));
 
         let arr = new Uint8Array(0);
-        let msg = ProtoMsg.pack(1004, arr);
+        let msg = MsgPack.pack(1004, arr);
         NET.send(msg);
     }
 
@@ -122,7 +122,7 @@ export default class Helloworld extends cc.Component {
         var msg = MotionInfo.create({ uid: LOCALDATA.getUid(), x: worldPt.x, y: worldPt.y });
         var uint8Arr = MotionInfo.encode(msg).finish();
 
-        var msgBuf = ProtoMsg.pack(1003, uint8Arr);
+        var msgBuf = MsgPack.pack(1003, uint8Arr);
         NET.send(msgBuf);
 
         let user: User = USERMANAGER.getUser(LOCALDATA.getUid());
