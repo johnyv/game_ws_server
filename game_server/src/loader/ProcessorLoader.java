@@ -2,8 +2,8 @@ package loader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import dispatcher.Dispatcher;
-import abstracted.Processor;
+import netty.dispatcher.Dispatcher;
+import netty.abstracted.Processor;
 
 import java.io.FileInputStream;
 import java.io.IOException;

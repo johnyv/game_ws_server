@@ -1,10 +1,10 @@
 package logic.proc;
 
-import abstracted.Processor;
+import netty.abstracted.Processor;
 import logic.protocol.Player;
 import logic.protocol.UserList;
-import packet.ProtoMsg;
-import session.Session;
+import netty.packet.ProtoMsg;
+import netty.session.Session;
 import user.User;
 import user.UserManager;
 

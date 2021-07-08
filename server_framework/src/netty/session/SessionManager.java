@@ -1,4 +1,4 @@
-package session;
+package netty.session;
 
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;

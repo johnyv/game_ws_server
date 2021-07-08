@@ -1,7 +1,7 @@
-package abstracted;
+package netty.abstracted;
 
-import session.Session;
-import packet.ProtoMsg;
+import netty.session.Session;
+import netty.packet.ProtoMsg;
 
 public abstract class Processor {
     protected int code = 0;

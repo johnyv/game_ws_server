@@ -1,6 +1,6 @@
 package user;
 
-import session.Session;
+import netty.session.Session;
 
 public class User {
     private String uid;

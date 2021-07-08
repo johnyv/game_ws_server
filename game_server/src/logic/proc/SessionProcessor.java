@@ -1,8 +1,8 @@
 package logic.proc;
 
-import abstracted.Processor;
-import packet.ProtoMsg;
-import session.Session;
+import netty.abstracted.Processor;
+import netty.packet.ProtoMsg;
+import netty.session.Session;
 import user.UserManager;
 
 public class SessionProcessor extends Processor {

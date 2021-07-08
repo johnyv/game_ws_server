@@ -1,12 +1,12 @@
 package logic.proc;
 
-import abstracted.Processor;
+import netty.abstracted.Processor;
 import com.google.protobuf.InvalidProtocolBufferException;
 import logic.protocol.MotionInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import packet.ProtoMsg;
-import session.Session;
+import netty.packet.ProtoMsg;
+import netty.session.Session;
 import user.UserManager;
 
 public class MotionProcessor extends Processor {

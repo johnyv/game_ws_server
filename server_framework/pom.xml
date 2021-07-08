@@ -9,8 +9,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>server_module_core</artifactId>
-    <groupId>server.module.core</groupId>
+    <artifactId>server_framework</artifactId>
+    <groupId>server.framework</groupId>
     <version>1.0-SNAPSHOT</version>
 
     <!--    <properties>-->
@@ -44,15 +44,15 @@
             <artifactId>junit</artifactId>
             <version>4.13</version>
         </dependency>
-        <dependency>
-            <groupId>server.module.utils</groupId>
-            <artifactId>server_module_utils</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>server.module.utils</groupId>-->
+<!--            <artifactId>server_module_utils</artifactId>-->
+<!--            <version>1.0-SNAPSHOT</version>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>
-        <finalName>server_module_core</finalName>
+        <finalName>server_framework</finalName>
         <sourceDirectory>src</sourceDirectory>
     </build>
 </project>

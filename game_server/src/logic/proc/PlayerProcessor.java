@@ -5,9 +5,9 @@ import io.netty.channel.ChannelHandlerContext;
 import logic.protocol.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import abstracted.Processor;
-import packet.ProtoMsg;
-import session.Session;
+import netty.abstracted.Processor;
+import netty.packet.ProtoMsg;
+import netty.session.Session;
 
 public class PlayerProcessor extends Processor {
     private static Logger logger = LoggerFactory.getLogger(PlayerProcessor.class);

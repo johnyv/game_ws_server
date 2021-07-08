@@ -16,15 +16,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>server.module.core</groupId>
-            <artifactId>server_module_core</artifactId>
+            <groupId>server.framework</groupId>
+            <artifactId>server_framework</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>server.module.db</groupId>
-            <artifactId>server_module_db</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>server.module.db</groupId>-->
+<!--            <artifactId>server_module_db</artifactId>-->
+<!--            <version>1.0-SNAPSHOT</version>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>

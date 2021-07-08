@@ -1,11 +1,11 @@
 package logic.proc;
 
-import abstracted.Processor;
+import netty.abstracted.Processor;
 import logic.protocol.LoginInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import packet.ProtoMsg;
-import session.Session;
+import netty.packet.ProtoMsg;
+import netty.session.Session;
 import user.User;
 import user.UserManager;
 

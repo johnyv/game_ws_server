@@ -1,4 +1,4 @@
-package packet;
+package netty.packet;
 
 import com.google.protobuf.MessageLite;
 import utils.ByteUtil;

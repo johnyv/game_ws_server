@@ -2,7 +2,7 @@ package netty;
 
 import io.netty.handler.ssl.SslContext;
 import netty.service.WebSocketService;
-import session.SessionThread;
+import netty.session.SessionThread;
 
 public class WebSocketBootstrap {
     private WebSocketService webSocketService;

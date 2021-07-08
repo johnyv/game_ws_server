@@ -1,4 +1,4 @@
-package session;
+package netty.session;
 
 public class SessionThread implements Runnable {
     private Thread serviceThread;

@@ -1,10 +1,10 @@
-package dispatcher;
+package netty.dispatcher;
 
-import session.Session;
+import netty.abstracted.Processor;
+import netty.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import abstracted.Processor;
-import packet.ProtoMsg;
+import netty.packet.ProtoMsg;
 
 import java.util.HashMap;
 import java.util.Map;

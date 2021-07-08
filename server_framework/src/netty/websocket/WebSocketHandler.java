@@ -1,6 +1,6 @@
 package netty.websocket;
 
-import dispatcher.Dispatcher;
+import netty.dispatcher.Dispatcher;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
@@ -12,8 +12,8 @@ import io.netty.handler.codec.http.websocketx.*;
 import io.netty.util.CharsetUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import packet.ProtoMsg;
-import session.Session;
+import netty.packet.ProtoMsg;
+import netty.session.Session;
 
 public class WebSocketHandler extends ChannelInboundHandlerAdapter {
     private final Logger logger = LoggerFactory.getLogger(WebSocketHandler.class);

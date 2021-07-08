@@ -10,9 +10,9 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>server_module_core</module>
-        <module>server_module_db</module>
-        <module>server_module_utils</module>
+        <module>server_framework</module>
+<!--        <module>server_module_db</module>-->
+<!--        <module>server_module_utils</module>-->
         <module>game_server</module>
     </modules>
 
