@@ -4,12 +4,8 @@ import javax.servlet.ServletContextListener;
 public class GameServerServletListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        try {
-            GameServer server = GameServer.getInstance();
-            server.run();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        GameServer server = GameServer.getInstance();
+        server.start();
     }
 
     @Override

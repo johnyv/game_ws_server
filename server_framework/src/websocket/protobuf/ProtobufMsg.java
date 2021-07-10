@@ -1,14 +1,14 @@
-package netty.packet;
+package websocket.protobuf;
 
 import com.google.protobuf.MessageLite;
 import utils.ByteUtil;
 
-public class ProtoMsg {
+public class ProtobufMsg {
     private int length;
     private int code;
     private byte[] data;
 
-    public ProtoMsg() {
+    public ProtobufMsg() {
     }
 
     public void setLength(int length) {
@@ -35,8 +35,8 @@ public class ProtoMsg {
         return data;
     }
 
-    public static ProtoMsg unPack(byte[] bytes) {
-        ProtoMsg pack = new ProtoMsg();
+    public static ProtobufMsg unPack(byte[] bytes) {
+        ProtobufMsg pack = new ProtobufMsg();
 
         int i, index = 0;
         byte[] lengthBytes = new byte[4];

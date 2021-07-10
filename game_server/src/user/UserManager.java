@@ -3,7 +3,6 @@ package user;
 import io.netty.channel.group.ChannelGroup;
 
 import java.util.Iterator;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class UserManager {
@@ -31,7 +30,7 @@ public class UserManager {
         }
     }
 
-    public ConcurrentHashMap getUserList(){
+    public ConcurrentHashMap<String, User> getUserList(){
         return userList;
     }
 

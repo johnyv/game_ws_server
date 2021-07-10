@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <option name="BUILD_PROCESS_ADDITIONAL_VM_OPTIONS" value="-Djps.track.ap.dependencies=false" />
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -11,14 +13,5 @@
         <module name="server_framework" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="common_db" target="8" />
-      <module name="common_netty" target="8" />
-      <module name="db_server" target="8" />
-      <module name="module_core" target="1.8" />
-      <module name="module_db" target="1.8" />
-      <module name="server_module_db" target="1.8" />
-      <module name="server_module_utils" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

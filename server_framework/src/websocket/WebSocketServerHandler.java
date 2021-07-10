@@ -1,6 +1,5 @@
-package netty.websocket;
+package websocket;
 
-import netty.dispatcher.Dispatcher;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
@@ -10,48 +9,30 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.codec.http.*;
 import io.netty.handler.codec.http.websocketx.*;
 import io.netty.util.CharsetUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import websocket.protobuf.ProtobufMsg;
-import netty.session.Session;
+import lombok.extern.slf4j.Slf4j;
 
-public class WebSocketHandler extends ChannelInboundHandlerAdapter {
-    private final Logger logger = LoggerFactory.getLogger(WebSocketHandler.class);
+@Slf4j
+public class WebSocketServerHandler extends ChannelInboundHandlerAdapter {
     private WebSocketServerHandshaker handShaker;
+    private WebSocketServer server;
     private static final String WEBSOCKET_PATH = "/ws";
     private boolean SSL;
 
-    public WebSocketHandler(boolean useSSL) {
-        SSL = useSSL;
+    public WebSocketServerHandler(WebSocketServer server) {
+        this.server = server;
     }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
-        logger.info("address:" + ctx.channel().remoteAddress().toString());
+        server.handleChannelActive(ctx);
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         super.channelInactive(ctx);
-
-        Session session = new Session(ctx);
-
-        ProtobufMsg pack = new ProtobufMsg();
-        pack.setLength(8);
-        pack.setCode(9999);
-        pack.setData(new byte[0]);
-
-        // todo: code 9999 processor.
-        Dispatcher.getInstance().dispatch(session, pack);
-
-        logger.info("close:" + ctx.channel().localAddress().toString());
-    }
-
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        server.handleChannelInactive(ctx);
         ctx.close();
-        logger.info(cause.getMessage());
     }
 
     @Override
@@ -68,6 +49,12 @@ public class WebSocketHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
         ctx.flush();
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        ctx.close();
+        log.info(cause.getMessage());
     }
 
     private void handleHttpRequest(ChannelHandlerContext ctx, FullHttpRequest request) {
@@ -111,25 +98,13 @@ public class WebSocketHandler extends ChannelInboundHandlerAdapter {
         }
 
         if (frame instanceof TextWebSocketFrame) {
-            TextWebSocketFrame tFrame = (TextWebSocketFrame) frame;
-            String txt = "TextWebSocketFrame:" + tFrame.text();
-            ctx.channel().write(new TextWebSocketFrame(txt));
+            String str = "TextWebSocketFrame:" + ((TextWebSocketFrame) frame).text();
+            ctx.channel().write(new TextWebSocketFrame(str));
             return;
         }
-        if (frame instanceof BinaryWebSocketFrame) {
-//            BinaryWebSocketFrame bFrame = (BinaryWebSocketFrame) frame;
-            byte[] bytes = new byte[frame.content().readableBytes()];
-            frame.content().readBytes(bytes);
-            frame.content().release();
 
-            try {
-                ProtobufMsg pack = ProtobufMsg.unPack(bytes);
-                Session session = new Session(ctx);
-                Dispatcher.getInstance().dispatch(session, pack);
-            } catch (Exception e) {
-                e.printStackTrace();
-                logger.error("parse failed.");
-            }
+        if (frame instanceof BinaryWebSocketFrame) {
+            server.handle(ctx, (BinaryWebSocketFrame) frame);
             return;
         }
     }

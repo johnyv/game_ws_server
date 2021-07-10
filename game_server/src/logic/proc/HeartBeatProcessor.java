@@ -4,7 +4,7 @@ import netty.abstracted.Processor;
 import logic.protocol.HBInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import netty.packet.ProtoMsg;
+import websocket.protobuf.ProtobufMsg;
 import netty.session.Session;
 
 public class HeartBeatProcessor extends Processor {
@@ -12,20 +12,20 @@ public class HeartBeatProcessor extends Processor {
     HBInfo hb;
 
     @Override
-    protected void init(Session session, ProtoMsg protoMsg) throws Exception {
-        hb = HBInfo.parseFrom(protoMsg.getData());
+    protected void init(Session session, ProtobufMsg protobufMsg) throws Exception {
+        hb = HBInfo.parseFrom(protobufMsg.getData());
     }
 
     @Override
-    public void process(Session session, ProtoMsg protoMsg) throws Exception {
-        init(session, protoMsg);
+    public void process(Session session, ProtobufMsg protobufMsg) throws Exception {
+        init(session, protobufMsg);
 
 //        logger.info("SystemCurrtime->" + hb.getSystemCurrtime());
 
         HBInfo.Builder hbr = HBInfo.newBuilder();
         hbr.setSystemCurrtime(System.currentTimeMillis());
 
-        byte[] bytes = ProtoMsg.pack(1001, hbr.build());
+        byte[] bytes = ProtobufMsg.pack(1001, hbr.build());
         session.write(bytes);
     }
 }

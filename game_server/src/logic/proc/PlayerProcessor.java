@@ -6,7 +6,7 @@ import logic.protocol.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import netty.abstracted.Processor;
-import netty.packet.ProtoMsg;
+import websocket.protobuf.ProtobufMsg;
 import netty.session.Session;
 
 public class PlayerProcessor extends Processor {
@@ -20,22 +20,22 @@ public class PlayerProcessor extends Processor {
     }
 
     @Override
-    protected void init(Session session, ProtoMsg protoMsg) {
+    protected void init(Session session, ProtobufMsg protobufMsg) {
         try {
-            player = Player.parseFrom(protoMsg.getData());
+            player = Player.parseFrom(protobufMsg.getData());
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void process(Session session, ProtoMsg protoMsg) throws Exception {
-        init(session, protoMsg);
+    public void process(Session session, ProtobufMsg protobufMsg) throws Exception {
+        init(session, protobufMsg);
 
         String name = player.getName();
         logger.info("name:" + name);
 
-        byte[] bytes = ProtoMsg.pack(protoMsg.getCode(), player);
+        byte[] bytes = ProtobufMsg.pack(protobufMsg.getCode(), player);
         session.write(bytes);
     }
 

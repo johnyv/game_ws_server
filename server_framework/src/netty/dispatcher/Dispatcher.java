@@ -1,16 +1,16 @@
 package netty.dispatcher;
 
+import lombok.extern.slf4j.Slf4j;
 import netty.abstracted.Processor;
 import netty.session.Session;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import netty.packet.ProtoMsg;
+import websocket.protobuf.ProtobufMsg;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 public class Dispatcher {
-    protected final static Logger logger = LoggerFactory.getLogger(Dispatcher.class);
+//    protected final static Logger logger = LoggerFactory.getLogger(Dispatcher.class);
     private static Dispatcher instance = new Dispatcher();
 
     Map<Integer, Processor> processors = null;
@@ -28,12 +28,12 @@ public class Dispatcher {
     public Processor get(Integer code) {
         Processor proc = processors.get(code);
         if (proc == null) {
-            logger.warn("Invalid code:" + code);
+            log.warn("Invalid code:" + code);
         }
         return proc;
     }
 
-    public void dispatch(final Session session, final ProtoMsg packet) {
+    public void dispatch(final Session session, final ProtobufMsg packet) {
         int code = packet.getCode();
         final Processor proc = get(code);
         if (proc == null) {
@@ -49,7 +49,7 @@ public class Dispatcher {
         session.addQuest(exec);
     }
 
-    private void process(final Processor proc, final Session session, final ProtoMsg packet) {
+    private void process(final Processor proc, final Session session, final ProtobufMsg packet) {
         try {
             proc.process(session, packet);
         } catch (Exception e) {

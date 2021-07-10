@@ -14,11 +14,17 @@
     <artifactId>game_server</artifactId>
     <packaging>war</packaging>
 
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>server.framework</groupId>
             <artifactId>server_framework</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>0.1</version>
         </dependency>
 <!--        <dependency>-->
 <!--            <groupId>server.module.db</groupId>-->
