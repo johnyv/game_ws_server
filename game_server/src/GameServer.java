@@ -1,7 +1,7 @@
 import lombok.extern.slf4j.Slf4j;
-import websocket.WebSocketServer;
-import websocket.handler.ChannelStateHandler;
-import websocket.handler.ProtobufHandler;
+import taurus.websocket.WebSocketServer;
+import taurus.websocket.handler.ChannelStateHandler;
+import taurus.websocket.handler.ProtobufHandler;
 
 import javax.net.ssl.SSLContext;
 import java.io.IOException;

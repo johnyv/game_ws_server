@@ -4,7 +4,7 @@ import netty.abstracted.Processor;
 import logic.protocol.LoginInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import websocket.protobuf.ProtobufMsg;
+import taurus.websocket.protobuf.ProtobufMsg;
 import netty.session.Session;
 import user.User;
 import user.UserManager;

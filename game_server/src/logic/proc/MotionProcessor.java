@@ -5,7 +5,7 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import logic.protocol.MotionInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import websocket.protobuf.ProtobufMsg;
+import taurus.websocket.protobuf.ProtobufMsg;
 import netty.session.Session;
 import user.UserManager;
 

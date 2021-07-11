@@ -6,7 +6,7 @@ import logic.protocol.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import netty.abstracted.Processor;
-import websocket.protobuf.ProtobufMsg;
+import taurus.websocket.protobuf.ProtobufMsg;
 import netty.session.Session;
 
 public class PlayerProcessor extends Processor {

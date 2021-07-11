@@ -3,6 +3,6 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/game_server/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/game_server/src" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/server_framework/src" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taurus-server-fwk/src" charset="UTF-8" />
   </component>
 </project>

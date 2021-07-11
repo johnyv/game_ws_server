@@ -1,7 +1,7 @@
 package handler;
 
 import io.netty.channel.ChannelHandlerContext;
-import websocket.handler.ChannelStateHandler;
+import taurus.websocket.handler.ChannelStateHandler;
 
 public class ChannelInactiveHandler implements ChannelStateHandler {
     @Override

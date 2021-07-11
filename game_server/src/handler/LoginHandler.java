@@ -4,8 +4,8 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import io.netty.channel.ChannelHandlerContext;
 import logic.protocol.LoginInfo;
 import lombok.extern.slf4j.Slf4j;
-import websocket.protobuf.ProtobufMsg;
-import websocket.handler.ProtobufHandler;
+import taurus.websocket.protobuf.ProtobufMsg;
+import taurus.websocket.handler.ProtobufHandler;
 
 @Slf4j
 public class LoginHandler implements ProtobufHandler {

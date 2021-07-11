@@ -8,10 +8,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="game_ws_server" />
+        <module name="taurus-server-fwk" />
         <module name="game_server" />
-        <module name="server_framework" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="server_module_core" target="1.8" />
+      <module name="server_module_db" target="1.8" />
+      <module name="server_module_utils" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

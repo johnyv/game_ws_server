@@ -3,7 +3,7 @@ package logic.proc;
 import netty.abstracted.Processor;
 import logic.protocol.Player;
 import logic.protocol.UserList;
-import websocket.protobuf.ProtobufMsg;
+import taurus.websocket.protobuf.ProtobufMsg;
 import netty.session.Session;
 import user.User;
 import user.UserManager;

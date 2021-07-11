@@ -1,12 +1,10 @@
 package test;
 
-import http.future.FutureListener;
-import http.http.Response;
-import io.netty.channel.nio.NioEventLoopGroup;
+import taurus.http.future.FutureListener;
+import taurus.http.handler.Response;
 import lombok.extern.slf4j.Slf4j;
-import utils.HttpUtil;
+import taurus.utils.HttpUtil;
 
-import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -41,10 +39,10 @@ public class HttpClientTest {
     }
 
 //    public static void main(String args[]) throws Throwable {
-//        HttpUtil.setBossEventLoopGroup(new NioEventLoopGroup(2, Executors.newFixedThreadPool(2, new DefaultThreadFactory("http-boss"))));
-//        HttpUtil.setWorkerEventLoopGroup(new NioEventLoopGroup(4, Executors.newFixedThreadPool(4, new DefaultThreadFactory("http-worker"))));
-//        HttpUtil.setRequestEventLoopGroup(new NioEventLoopGroup(2, Executors.newFixedThreadPool(2, new DefaultThreadFactory("http-request"))));
-//        HttpUtil.initClientPool("http", "127.0.0.1", 19043, 100);
+//        HttpUtil.setBossEventLoopGroup(new NioEventLoopGroup(2, Executors.newFixedThreadPool(2, new DefaultThreadFactory("handler-boss"))));
+//        HttpUtil.setWorkerEventLoopGroup(new NioEventLoopGroup(4, Executors.newFixedThreadPool(4, new DefaultThreadFactory("handler-worker"))));
+//        HttpUtil.setRequestEventLoopGroup(new NioEventLoopGroup(2, Executors.newFixedThreadPool(2, new DefaultThreadFactory("handler-request"))));
+//        HttpUtil.initClientPool("handler", "127.0.0.1", 19043, 100);
 //        HttpClientTest test = new HttpClientTest();
 //        test.start();
 //    }

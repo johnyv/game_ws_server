@@ -22,9 +22,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>server.framework</groupId>
-            <artifactId>server_framework</artifactId>
-            <version>0.1</version>
+            <groupId>taurus.server.fwk</groupId>
+            <artifactId>taurus-server-fwk</artifactId>
+            <version>1.0.0</version>
         </dependency>
 <!--        <dependency>-->
 <!--            <groupId>server.module.db</groupId>-->

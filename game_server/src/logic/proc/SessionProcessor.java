@@ -1,7 +1,7 @@
 package logic.proc;
 
 import netty.abstracted.Processor;
-import websocket.protobuf.ProtobufMsg;
+import taurus.websocket.protobuf.ProtobufMsg;
 import netty.session.Session;
 import user.UserManager;
 
